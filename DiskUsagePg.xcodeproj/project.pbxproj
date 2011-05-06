@@ -1,0 +1,473 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		625604271374635C00C94C21 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625604261374635C00C94C21 /* Cocoa.framework */; };
+		625604311374635C00C94C21 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6256042F1374635C00C94C21 /* InfoPlist.strings */; };
+		625604341374635C00C94C21 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 625604331374635C00C94C21 /* main.m */; };
+		625604371374635C00C94C21 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 625604351374635C00C94C21 /* Credits.rtf */; };
+		6256043A1374635C00C94C21 /* DiskUsagePgAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 625604391374635C00C94C21 /* DiskUsagePgAppDelegate.m */; };
+		6256043D1374635D00C94C21 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6256043B1374635D00C94C21 /* MainMenu.xib */; };
+		625604401374635D00C94C21 /* DiskUsagePg.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6256043E1374635D00C94C21 /* DiskUsagePg.xcdatamodeld */; };
+		625604471374635D00C94C21 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 625604261374635C00C94C21 /* Cocoa.framework */; };
+		6256044F1374635D00C94C21 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6256044D1374635D00C94C21 /* InfoPlist.strings */; };
+		625604521374635D00C94C21 /* DiskUsagePgTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 625604511374635D00C94C21 /* DiskUsagePgTests.h */; };
+		625604541374635D00C94C21 /* DiskUsagePgTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 625604531374635D00C94C21 /* DiskUsagePgTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		625604481374635D00C94C21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 625604191374635C00C94C21 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 625604211374635C00C94C21;
+			remoteInfo = DiskUsagePg;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		625604221374635C00C94C21 /* DiskUsagePg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DiskUsagePg.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		625604261374635C00C94C21 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		625604291374635C00C94C21 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		6256042A1374635C00C94C21 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		6256042B1374635C00C94C21 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6256042E1374635C00C94C21 /* DiskUsagePg-Info.plist */ = {isa = PBXFileReference; path = "DiskUsagePg-Info.plist"; sourceTree = "<group>"; };
+		625604301374635C00C94C21 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		625604321374635C00C94C21 /* DiskUsagePg-Prefix.pch */ = {isa = PBXFileReference; path = "DiskUsagePg-Prefix.pch"; sourceTree = "<group>"; };
+		625604331374635C00C94C21 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		625604361374635C00C94C21 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		625604381374635C00C94C21 /* DiskUsagePgAppDelegate.h */ = {isa = PBXFileReference; path = DiskUsagePgAppDelegate.h; sourceTree = "<group>"; };
+		625604391374635C00C94C21 /* DiskUsagePgAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiskUsagePgAppDelegate.m; sourceTree = "<group>"; };
+		6256043C1374635D00C94C21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		6256043F1374635D00C94C21 /* DiskUsagePg.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DiskUsagePg.xcdatamodel; sourceTree = "<group>"; };
+		625604461374635D00C94C21 /* DiskUsagePgTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiskUsagePgTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6256044C1374635D00C94C21 /* DiskUsagePgTests-Info.plist */ = {isa = PBXFileReference; path = "DiskUsagePgTests-Info.plist"; sourceTree = "<group>"; };
+		6256044E1374635D00C94C21 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		625604501374635D00C94C21 /* DiskUsagePgTests-Prefix.pch */ = {isa = PBXFileReference; path = "DiskUsagePgTests-Prefix.pch"; sourceTree = "<group>"; };
+		625604511374635D00C94C21 /* DiskUsagePgTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiskUsagePgTests.h; sourceTree = "<group>"; };
+		625604531374635D00C94C21 /* DiskUsagePgTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiskUsagePgTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6256041F1374635C00C94C21 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				625604271374635C00C94C21 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		625604421374635D00C94C21 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				625604471374635D00C94C21 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		625604171374635C00C94C21 = {
+			isa = PBXGroup;
+			children = (
+				6256042C1374635C00C94C21 /* DiskUsagePg */,
+				6256044A1374635D00C94C21 /* DiskUsagePgTests */,
+				625604251374635C00C94C21 /* Frameworks */,
+				625604231374635C00C94C21 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		625604231374635C00C94C21 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				625604221374635C00C94C21 /* DiskUsagePg.app */,
+				625604461374635D00C94C21 /* DiskUsagePgTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		625604251374635C00C94C21 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				625604261374635C00C94C21 /* Cocoa.framework */,
+				625604281374635C00C94C21 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		625604281374635C00C94C21 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				625604291374635C00C94C21 /* AppKit.framework */,
+				6256042A1374635C00C94C21 /* CoreData.framework */,
+				6256042B1374635C00C94C21 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		6256042C1374635C00C94C21 /* DiskUsagePg */ = {
+			isa = PBXGroup;
+			children = (
+				625604381374635C00C94C21 /* DiskUsagePgAppDelegate.h */,
+				625604391374635C00C94C21 /* DiskUsagePgAppDelegate.m */,
+				6256043B1374635D00C94C21 /* MainMenu.xib */,
+				6256043E1374635D00C94C21 /* DiskUsagePg.xcdatamodeld */,
+				6256042D1374635C00C94C21 /* Supporting Files */,
+			);
+			path = DiskUsagePg;
+			sourceTree = "<group>";
+		};
+		6256042D1374635C00C94C21 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6256042E1374635C00C94C21 /* DiskUsagePg-Info.plist */,
+				6256042F1374635C00C94C21 /* InfoPlist.strings */,
+				625604321374635C00C94C21 /* DiskUsagePg-Prefix.pch */,
+				625604331374635C00C94C21 /* main.m */,
+				625604351374635C00C94C21 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6256044A1374635D00C94C21 /* DiskUsagePgTests */ = {
+			isa = PBXGroup;
+			children = (
+				625604511374635D00C94C21 /* DiskUsagePgTests.h */,
+				625604531374635D00C94C21 /* DiskUsagePgTests.m */,
+				6256044B1374635D00C94C21 /* Supporting Files */,
+			);
+			path = DiskUsagePgTests;
+			sourceTree = "<group>";
+		};
+		6256044B1374635D00C94C21 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6256044C1374635D00C94C21 /* DiskUsagePgTests-Info.plist */,
+				6256044D1374635D00C94C21 /* InfoPlist.strings */,
+				625604501374635D00C94C21 /* DiskUsagePgTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		625604211374635C00C94C21 /* DiskUsagePg */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 625604571374635D00C94C21 /* Build configuration list for PBXNativeTarget "DiskUsagePg" */;
+			buildPhases = (
+				6256041E1374635C00C94C21 /* Sources */,
+				6256041F1374635C00C94C21 /* Frameworks */,
+				625604201374635C00C94C21 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DiskUsagePg;
+			productName = DiskUsagePg;
+			productReference = 625604221374635C00C94C21 /* DiskUsagePg.app */;
+			productType = "com.apple.product-type.application";
+		};
+		625604451374635D00C94C21 /* DiskUsagePgTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6256045A1374635D00C94C21 /* Build configuration list for PBXNativeTarget "DiskUsagePgTests" */;
+			buildPhases = (
+				625604411374635D00C94C21 /* Sources */,
+				625604421374635D00C94C21 /* Frameworks */,
+				625604431374635D00C94C21 /* Resources */,
+				625604441374635D00C94C21 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				625604491374635D00C94C21 /* PBXTargetDependency */,
+			);
+			name = DiskUsagePgTests;
+			productName = DiskUsagePgTests;
+			productReference = 625604461374635D00C94C21 /* DiskUsagePgTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		625604191374635C00C94C21 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 6256041C1374635C00C94C21 /* Build configuration list for PBXProject "DiskUsagePg" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 625604171374635C00C94C21;
+			productRefGroup = 625604231374635C00C94C21 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				625604211374635C00C94C21 /* DiskUsagePg */,
+				625604451374635D00C94C21 /* DiskUsagePgTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		625604201374635C00C94C21 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				625604311374635C00C94C21 /* InfoPlist.strings in Resources */,
+				625604371374635C00C94C21 /* Credits.rtf in Resources */,
+				6256043D1374635D00C94C21 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		625604431374635D00C94C21 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6256044F1374635D00C94C21 /* InfoPlist.strings in Resources */,
+				625604521374635D00C94C21 /* DiskUsagePgTests.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		625604441374635D00C94C21 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6256041E1374635C00C94C21 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				625604341374635C00C94C21 /* main.m in Sources */,
+				6256043A1374635C00C94C21 /* DiskUsagePgAppDelegate.m in Sources */,
+				625604401374635D00C94C21 /* DiskUsagePg.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		625604411374635D00C94C21 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				625604541374635D00C94C21 /* DiskUsagePgTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		625604491374635D00C94C21 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 625604211374635C00C94C21 /* DiskUsagePg */;
+			targetProxy = 625604481374635D00C94C21 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6256042F1374635C00C94C21 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				625604301374635C00C94C21 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		625604351374635C00C94C21 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				625604361374635C00C94C21 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		6256043B1374635D00C94C21 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6256043C1374635D00C94C21 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		6256044D1374635D00C94C21 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6256044E1374635D00C94C21 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		625604551374635D00C94C21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		625604561374635D00C94C21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		625604581374635D00C94C21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DiskUsagePg/DiskUsagePg-Prefix.pch";
+				INFOPLIST_FILE = "DiskUsagePg/DiskUsagePg-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		625604591374635D00C94C21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DiskUsagePg/DiskUsagePg-Prefix.pch";
+				INFOPLIST_FILE = "DiskUsagePg/DiskUsagePg-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		6256045B1374635D00C94C21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DiskUsagePg.app/Contents/MacOS/DiskUsagePg";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DiskUsagePgTests/DiskUsagePgTests-Prefix.pch";
+				INFOPLIST_FILE = "DiskUsagePgTests/DiskUsagePgTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		6256045C1374635D00C94C21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DiskUsagePg.app/Contents/MacOS/DiskUsagePg";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DiskUsagePgTests/DiskUsagePgTests-Prefix.pch";
+				INFOPLIST_FILE = "DiskUsagePgTests/DiskUsagePgTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6256041C1374635C00C94C21 /* Build configuration list for PBXProject "DiskUsagePg" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				625604551374635D00C94C21 /* Debug */,
+				625604561374635D00C94C21 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		625604571374635D00C94C21 /* Build configuration list for PBXNativeTarget "DiskUsagePg" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				625604581374635D00C94C21 /* Debug */,
+				625604591374635D00C94C21 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		6256045A1374635D00C94C21 /* Build configuration list for PBXNativeTarget "DiskUsagePgTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6256045B1374635D00C94C21 /* Debug */,
+				6256045C1374635D00C94C21 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6256043E1374635D00C94C21 /* DiskUsagePg.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6256043F1374635D00C94C21 /* DiskUsagePg.xcdatamodel */,
+			);
+			currentVersion = 6256043F1374635D00C94C21 /* DiskUsagePg.xcdatamodel */;
+			path = DiskUsagePg.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 625604191374635C00C94C21 /* Project object */;
+}
