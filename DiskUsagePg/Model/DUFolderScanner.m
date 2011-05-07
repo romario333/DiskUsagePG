@@ -30,10 +30,7 @@
 {
     // TODO: kontrola, ze folderUrl existuje, je to adresar
     
-    NSMutableDictionary *folderInfos = [[NSMutableDictionary alloc] init];
-    
     DUFolderInfo *rootFolder = [[DUFolderInfo alloc] initWithURL:folderUrl parentFolder:nil];
-    [folderInfos setObject:rootFolder forKey:folderUrl];
     
     // TODO: existuje i NSURLFileAllocatedSizeKey
     NSArray *keysToRead = [NSArray arrayWithObjects:NSURLIsDirectoryKey, NSURLFileSizeKey, nil];
@@ -46,49 +43,56 @@
                                                 return NO;
                                             }];
     
+    DUFolderInfo *folder = rootFolder;
+    NSUInteger level = 0;
     for (NSURL *url in dirEnumerator)
     {
+//        NSLog(@"file=%@", url);
+//        NSLog(@"level=%lu", [dirEnumerator level]);
+        
         NSNumber *isDirectory = nil;
         [url getResourceValue:&isDirectory forKey:NSURLIsDirectoryKey error:NULL];
         
-        //NSLog(@"url=%@; withoutLastPathComponent=%@;", url, [url URLByDeletingLastPathComponent]);
         
-        NSURL *folderURL;
-        if ([isDirectory boolValue])
+        if (dirEnumerator.level > level)
         {
-            folderURL = url;
+            // we are going deeper down in folder hierarchy
+            NSURL *folderURL;
+            if ([isDirectory boolValue])
+            {
+                folderURL = url;
+            }
+            else
+            {
+                folderURL = [url URLByDeletingLastPathComponent];
+            }
+            
+            DUFolderInfo *childFolder = [[DUFolderInfo alloc] initWithURL:folderURL parentFolder:nil];
+            [folder addSubfolder:childFolder];
+            folder = childFolder;
+            [childFolder release];
         }
-        else
+        else if (dirEnumerator.level < level)
         {
-            folderURL = [url URLByDeletingLastPathComponent];
+            // we are going back up in folder hierarchy
+            folder = [folder parentFolder];
+            if (folder == nil)
+            {
+                // we are back at top
+                folder = rootFolder;
+            }
         }
-        
-        DUFolderInfo *folderInfo = [folderInfos objectForKey:folderURL];
-        if (folderInfo == nil)
-        {
-            folderInfo = [[DUFolderInfo alloc] initWithURL:folderURL parentFolder:nil];
-            [folderInfos setObject:folderInfo forKey:folderURL];
-            [folderInfo release];
-        }
+        level = dirEnumerator.level;
         
         if (![isDirectory boolValue])
         {
             // add file size to directory info
             NSNumber *fileSize;
             [url getResourceValue:&fileSize forKey:NSURLFileSizeKey error:NULL];
-            folderInfo.size += [fileSize longValue];
+            folder.size += [fileSize longValue];
         }
     }
     
-    // create parent-child relationships between directories
-    for (NSURL *childURL in [folderInfos keyEnumerator])
-    {
-        DUFolderInfo *child = [folderInfos objectForKey:childURL];
-        DUFolderInfo *parent = [folderInfos objectForKey:[childURL URLByDeletingLastPathComponent]];
-        [parent addSubfolder:child];
-    }
-    
-    [folderInfos release];
     [fileManager release];
     
     // TODO: tohle jako fakt a proc me nevaruje clang?
