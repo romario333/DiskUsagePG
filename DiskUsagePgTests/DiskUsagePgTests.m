@@ -25,10 +25,17 @@
     [super tearDown];
 }
 
-- (void)testExample
+- (void)testTestDir
 {
     DUFolderScanner *scanner = [[DUFolderScanner alloc] init];
     [scanner scanFolder:[NSURL URLWithString:@"/Users/romario/tmp/testdir"]];
 }
+
+- (void)testTestHome
+{
+    DUFolderScanner *scanner = [[DUFolderScanner alloc] init];
+    [scanner scanFolder:[NSURL URLWithString:@"/Users/romario"]];
+}
+
 
 @end

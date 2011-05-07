@@ -67,12 +67,8 @@
         if (folderInfo == nil)
         {
             folderInfo = [[DUFolderInfo alloc] initWithURL:folderURL parentFolder:nil];
-            NSLog(@"retainCount1=%lu", [folderInfo retainCount]);
             [folderInfos setObject:folderInfo forKey:folderURL];
-            NSLog(@"retainCount2=%lu", [folderInfo retainCount]);
             [folderInfo release];
-            NSLog(@"retainCount3=%lu", [folderInfo retainCount]);
-
         }
         
         if (![isDirectory boolValue])
@@ -92,11 +88,11 @@
         [parent addSubfolder:child];
     }
     
-    // TODO: ACH JO, PROC TO PADA, KDYZ RELEASUJU folderInfos ??
-    [fileManager release];
     [folderInfos release];
+    [fileManager release];
     
-    return rootFolder;
+    // TODO: tohle jako fakt a proc me nevaruje clang?
+    return [rootFolder autorelease];
 }
 
 @end

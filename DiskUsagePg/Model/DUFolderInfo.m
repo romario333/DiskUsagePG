@@ -21,9 +21,9 @@
 
 - (void)dealloc
 {
-    [_subfolders dealloc];
-    [_parentFolder dealloc];
-    [_url dealloc];
+    [_subfolders release];
+    [_parentFolder release];
+    [_url release];
     
     [super dealloc];
 }
