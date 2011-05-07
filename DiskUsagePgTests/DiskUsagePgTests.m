@@ -27,7 +27,8 @@
 
 - (void)testExample
 {
-    STFail(@"Unit tests are not implemented yet in DiskUsagePgTests");
+    DUFolderScanner *scanner = [[DUFolderScanner alloc] init];
+    [scanner scanFolder:[NSURL URLWithString:@"/Users/romario/tmp/testdir"]];
 }
 
 @end

@@ -18,6 +18,8 @@
 		6256044F1374635D00C94C21 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6256044D1374635D00C94C21 /* InfoPlist.strings */; };
 		625604521374635D00C94C21 /* DiskUsagePgTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 625604511374635D00C94C21 /* DiskUsagePgTests.h */; };
 		625604541374635D00C94C21 /* DiskUsagePgTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 625604531374635D00C94C21 /* DiskUsagePgTests.m */; };
+		62560467137464D600C94C21 /* DUFolderInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 62560466137464D600C94C21 /* DUFolderInfo.m */; };
+		6256046D137549FF00C94C21 /* DUFolderScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6256046C137549FF00C94C21 /* DUFolderScanner.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,21 +38,25 @@
 		625604291374635C00C94C21 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		6256042A1374635C00C94C21 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6256042B1374635C00C94C21 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		6256042E1374635C00C94C21 /* DiskUsagePg-Info.plist */ = {isa = PBXFileReference; path = "DiskUsagePg-Info.plist"; sourceTree = "<group>"; };
+		6256042E1374635C00C94C21 /* DiskUsagePg-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DiskUsagePg-Info.plist"; sourceTree = "<group>"; };
 		625604301374635C00C94C21 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		625604321374635C00C94C21 /* DiskUsagePg-Prefix.pch */ = {isa = PBXFileReference; path = "DiskUsagePg-Prefix.pch"; sourceTree = "<group>"; };
+		625604321374635C00C94C21 /* DiskUsagePg-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DiskUsagePg-Prefix.pch"; sourceTree = "<group>"; };
 		625604331374635C00C94C21 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		625604361374635C00C94C21 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		625604381374635C00C94C21 /* DiskUsagePgAppDelegate.h */ = {isa = PBXFileReference; path = DiskUsagePgAppDelegate.h; sourceTree = "<group>"; };
+		625604381374635C00C94C21 /* DiskUsagePgAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiskUsagePgAppDelegate.h; sourceTree = "<group>"; };
 		625604391374635C00C94C21 /* DiskUsagePgAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiskUsagePgAppDelegate.m; sourceTree = "<group>"; };
 		6256043C1374635D00C94C21 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		6256043F1374635D00C94C21 /* DiskUsagePg.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DiskUsagePg.xcdatamodel; sourceTree = "<group>"; };
 		625604461374635D00C94C21 /* DiskUsagePgTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiskUsagePgTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		6256044C1374635D00C94C21 /* DiskUsagePgTests-Info.plist */ = {isa = PBXFileReference; path = "DiskUsagePgTests-Info.plist"; sourceTree = "<group>"; };
+		6256044C1374635D00C94C21 /* DiskUsagePgTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DiskUsagePgTests-Info.plist"; sourceTree = "<group>"; };
 		6256044E1374635D00C94C21 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		625604501374635D00C94C21 /* DiskUsagePgTests-Prefix.pch */ = {isa = PBXFileReference; path = "DiskUsagePgTests-Prefix.pch"; sourceTree = "<group>"; };
+		625604501374635D00C94C21 /* DiskUsagePgTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DiskUsagePgTests-Prefix.pch"; sourceTree = "<group>"; };
 		625604511374635D00C94C21 /* DiskUsagePgTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiskUsagePgTests.h; sourceTree = "<group>"; };
 		625604531374635D00C94C21 /* DiskUsagePgTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiskUsagePgTests.m; sourceTree = "<group>"; };
+		62560465137464D600C94C21 /* DUFolderInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DUFolderInfo.h; path = Model/DUFolderInfo.h; sourceTree = "<group>"; };
+		62560466137464D600C94C21 /* DUFolderInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DUFolderInfo.m; path = Model/DUFolderInfo.m; sourceTree = "<group>"; };
+		6256046B137549FF00C94C21 /* DUFolderScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DUFolderScanner.h; path = Model/DUFolderScanner.h; sourceTree = "<group>"; };
+		6256046C137549FF00C94C21 /* DUFolderScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DUFolderScanner.m; path = Model/DUFolderScanner.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +120,7 @@
 		6256042C1374635C00C94C21 /* DiskUsagePg */ = {
 			isa = PBXGroup;
 			children = (
+				6256045D1374636800C94C21 /* Model */,
 				625604381374635C00C94C21 /* DiskUsagePgAppDelegate.h */,
 				625604391374635C00C94C21 /* DiskUsagePgAppDelegate.m */,
 				6256043B1374635D00C94C21 /* MainMenu.xib */,
@@ -138,6 +145,7 @@
 		6256044A1374635D00C94C21 /* DiskUsagePgTests */ = {
 			isa = PBXGroup;
 			children = (
+				6256045E1374637300C94C21 /* Model */,
 				625604511374635D00C94C21 /* DiskUsagePgTests.h */,
 				625604531374635D00C94C21 /* DiskUsagePgTests.m */,
 				6256044B1374635D00C94C21 /* Supporting Files */,
@@ -153,6 +161,24 @@
 				625604501374635D00C94C21 /* DiskUsagePgTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6256045D1374636800C94C21 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				62560465137464D600C94C21 /* DUFolderInfo.h */,
+				62560466137464D600C94C21 /* DUFolderInfo.m */,
+				6256046B137549FF00C94C21 /* DUFolderScanner.h */,
+				6256046C137549FF00C94C21 /* DUFolderScanner.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		6256045E1374637300C94C21 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,6 +289,8 @@
 				625604341374635C00C94C21 /* main.m in Sources */,
 				6256043A1374635C00C94C21 /* DiskUsagePgAppDelegate.m in Sources */,
 				625604401374635D00C94C21 /* DiskUsagePg.xcdatamodeld in Sources */,
+				62560467137464D600C94C21 /* DUFolderInfo.m in Sources */,
+				6256046D137549FF00C94C21 /* DUFolderScanner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
