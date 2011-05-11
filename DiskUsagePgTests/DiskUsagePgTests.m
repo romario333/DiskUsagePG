@@ -34,11 +34,29 @@ void DULogFolderInfo(DUFolderInfo *folder);
     DULogFolderInfo(folder);
 }
 
-- (void)testTestHome
+- (void)testFolderInfoSorting
 {
-    DUFolderScanner *scanner = [[DUFolderScanner alloc] init];
-    [scanner scanFolder:[NSURL URLWithString:@"/Users/romario"]];
+    NSArray *folders = [NSArray arrayWithObjects:
+                        [DUFolderInfo folderInfoWithURL:[NSURL URLWithString:@"test2"]],
+                        [DUFolderInfo folderInfoWithURL:[NSURL URLWithString:@"test1"]],
+                        nil];
+    
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"url.lastPathComponent" ascending:YES];
+    NSArray *sortedFolders = [folders sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
+    
+    for (DUFolderInfo *folder in sortedFolders)
+    {
+        NSLog(@"%@", [folder.url lastPathComponent]);
+    }
+
+                        
 }
+
+//- (void)testTestHome
+//{
+//    DUFolderScanner *scanner = [[DUFolderScanner alloc] init];
+//    [scanner scanFolder:[NSURL URLWithString:@"/Users/romario"]];
+//}
 
 
 void DULogFolderInfoInner(DUFolderInfo *folder, NSMutableString *indent)
