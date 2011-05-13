@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CorePlot/CorePlot.h>
-#import "DUFolderScanner.h"
+#import "DUScanFolderOperation.h"
 #import "DURingChartView.h"
 #import "DURingChartDataSource.h"
 #import "DUFolderInfoTopEntries.h"
@@ -16,13 +16,13 @@
 @interface DiskUsageController : NSViewController <NSOutlineViewDataSource,  DURingChartDataSource> {
 @private
     IBOutlet DURingChartView *_diskUsageChart;
-    DUFolderInfo *_folder;
+    DUFolderInfo *_scannedFolderInfo;
     DUFolderInfoTopEntries *_topFolders;
     IBOutlet NSTextFieldCell *_pathTextField;
     IBOutlet NSOutlineView *_diskUsageTree;
     
     NSOperationQueue *_backgroundQueue;
-    DUFolderScanner *_scanFolderOperation;
+    DUScanFolderOperation *_scanFolderOperation;
 }
 
 - (IBAction)scanFolder:(id)sender;

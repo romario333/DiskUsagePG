@@ -7,7 +7,7 @@
 //
 
 #import <SenTestingKit/SenTestingKit.h>
-#import "DUFolderScanner.h"
+#import "DUScanFolderOperation.h"
 
 
 @interface DiskUsagePgTests : SenTestCase {

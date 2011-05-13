@@ -29,7 +29,7 @@ void DULogFolderInfo(DUFolderInfo *folder);
 
 - (void)testTestDir
 {
-    DUFolderScanner *scanner = [[DUFolderScanner alloc] init];
+    DUScanFolderOperation *scanner = [[DUScanFolderOperation alloc] init];
     DUFolderInfo *folder = [scanner scanFolder:[NSURL URLWithString:@"/Users/romario/tmp/testdir"]];
     DULogFolderInfo(folder);
 }

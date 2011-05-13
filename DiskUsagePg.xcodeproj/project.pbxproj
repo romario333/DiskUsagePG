@@ -18,7 +18,7 @@
 		6256044F1374635D00C94C21 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6256044D1374635D00C94C21 /* InfoPlist.strings */; };
 		625604521374635D00C94C21 /* DiskUsagePgTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 625604511374635D00C94C21 /* DiskUsagePgTests.h */; };
 		625604541374635D00C94C21 /* DiskUsagePgTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 625604531374635D00C94C21 /* DiskUsagePgTests.m */; };
-		625605F41375A94200C94C21 /* DUFolderScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 625605F01375A94200C94C21 /* DUFolderScanner.m */; };
+		625605F41375A94200C94C21 /* DUScanFolderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 625605F01375A94200C94C21 /* DUScanFolderOperation.m */; };
 		625605F51375A94200C94C21 /* DUFolderInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 625605F11375A94200C94C21 /* DUFolderInfo.m */; };
 		625605F81375A97900C94C21 /* DiskUsageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 625605F71375A97900C94C21 /* DiskUsageController.m */; };
 		62953F081379A8F000478458 /* DURingChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62953F071379A8F000478458 /* DURingChartView.m */; };
@@ -71,10 +71,10 @@
 		625604501374635D00C94C21 /* DiskUsagePgTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DiskUsagePgTests-Prefix.pch"; sourceTree = "<group>"; };
 		625604511374635D00C94C21 /* DiskUsagePgTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiskUsagePgTests.h; sourceTree = "<group>"; };
 		625604531374635D00C94C21 /* DiskUsagePgTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiskUsagePgTests.m; sourceTree = "<group>"; };
-		625605F01375A94200C94C21 /* DUFolderScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DUFolderScanner.m; path = Models/DUFolderScanner.m; sourceTree = "<group>"; };
+		625605F01375A94200C94C21 /* DUScanFolderOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DUScanFolderOperation.m; path = Models/DUScanFolderOperation.m; sourceTree = "<group>"; };
 		625605F11375A94200C94C21 /* DUFolderInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DUFolderInfo.m; path = Models/DUFolderInfo.m; sourceTree = "<group>"; };
 		625605F21375A94200C94C21 /* DUFolderInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DUFolderInfo.h; path = Models/DUFolderInfo.h; sourceTree = "<group>"; };
-		625605F31375A94200C94C21 /* DUFolderScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DUFolderScanner.h; path = Models/DUFolderScanner.h; sourceTree = "<group>"; };
+		625605F31375A94200C94C21 /* DUScanFolderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DUScanFolderOperation.h; path = Models/DUScanFolderOperation.h; sourceTree = "<group>"; };
 		625605F61375A97900C94C21 /* DiskUsageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiskUsageController.h; path = Controllers/DiskUsageController.h; sourceTree = "<group>"; };
 		625605F71375A97900C94C21 /* DiskUsageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DiskUsageController.m; path = Controllers/DiskUsageController.m; sourceTree = "<group>"; };
 		62953F031379A61700478458 /* DataFormatingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataFormatingUtils.h; sourceTree = "<group>"; };
@@ -198,8 +198,8 @@
 			children = (
 				625605F21375A94200C94C21 /* DUFolderInfo.h */,
 				625605F11375A94200C94C21 /* DUFolderInfo.m */,
-				625605F31375A94200C94C21 /* DUFolderScanner.h */,
-				625605F01375A94200C94C21 /* DUFolderScanner.m */,
+				625605F31375A94200C94C21 /* DUScanFolderOperation.h */,
+				625605F01375A94200C94C21 /* DUScanFolderOperation.m */,
 				62BAAE39137A59D40086BE25 /* DUFolderInfoTopEntries.h */,
 				62BAAE3A137A59D40086BE25 /* DUFolderInfoTopEntries.m */,
 			);
@@ -336,7 +336,7 @@
 				625604341374635C00C94C21 /* main.m in Sources */,
 				6256043A1374635C00C94C21 /* DiskUsagePgAppDelegate.m in Sources */,
 				625604401374635D00C94C21 /* DiskUsagePg.xcdatamodeld in Sources */,
-				625605F41375A94200C94C21 /* DUFolderScanner.m in Sources */,
+				625605F41375A94200C94C21 /* DUScanFolderOperation.m in Sources */,
 				625605F51375A94200C94C21 /* DUFolderInfo.m in Sources */,
 				625605F81375A97900C94C21 /* DiskUsageController.m in Sources */,
 				62953F081379A8F000478458 /* DURingChartView.m in Sources */,

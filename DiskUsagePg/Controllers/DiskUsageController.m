@@ -26,7 +26,7 @@
     [_backgroundQueue release];
     
     // TODO: co kdyz jsem ho neinicializoval
-    [_folder release];
+    [_scannedFolderInfo release];
     [_topFolders release];
     
     [super dealloc];
@@ -37,9 +37,9 @@
     
     NSAssert(_scanFolderOperation == nil, @"Existing scan operation in progress?");
     
-    _scanFolderOperation = [[DUFolderScanner alloc]initWithFolder:[NSURL URLWithString:_pathTextField.title]];
+    _scanFolderOperation = [[DUScanFolderOperation alloc]initWithFolder:[NSURL URLWithString:_pathTextField.title]];
     // TODO: prejmenovat _folder
-    _folder = [_scanFolderOperation.folderInfo retain];
+    _scannedFolderInfo = [_scanFolderOperation.folderInfo retain];
     [_scanFolderOperation addObserver:self forKeyPath:@"isFinished" options:NSKeyValueObservingOptionNew context:nil];
     [_backgroundQueue addOperation:_scanFolderOperation];
 
@@ -55,8 +55,8 @@
 - (IBAction)updateGUI
 {
     // TODO: razeni
-    [_folder sort];
-    _topFolders = [[DUFolderInfoTopEntries alloc]initWithArray:_folder.subfolders shareThreshold:10];
+    [_scannedFolderInfo sort];
+    _topFolders = [[DUFolderInfoTopEntries alloc]initWithArray:_scannedFolderInfo.subfolders shareThreshold:10];
 
     
     // TODO: fakt musim poustet reloadData na main threadu? outlineView fungoval i bez toho, chart ale
@@ -81,25 +81,25 @@
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
 {
-    DUFolderInfo *folder = item == nil ? _folder :(DUFolderInfo *)item;
+    DUFolderInfo *folder = item == nil ? _scannedFolderInfo :(DUFolderInfo *)item;
     return [folder.subfolders objectAtIndex:index];
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
 {
-    DUFolderInfo *folder = item == nil ? _folder :(DUFolderInfo *)item;
+    DUFolderInfo *folder = item == nil ? _scannedFolderInfo :(DUFolderInfo *)item;
     return [folder.subfolders count] > 0;
 }
 
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item 
 {
-    DUFolderInfo *folder = item == nil ? _folder :(DUFolderInfo *)item;
+    DUFolderInfo *folder = item == nil ? _scannedFolderInfo :(DUFolderInfo *)item;
     return [folder.subfolders count];
 }
 
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
 {
-    DUFolderInfo *folder = item == nil ? _folder :(DUFolderInfo *)item;
+    DUFolderInfo *folder = item == nil ? _scannedFolderInfo :(DUFolderInfo *)item;
     
     if ([tableColumn.identifier isEqualTo:@"folderName"])
     {
