@@ -57,7 +57,8 @@
                                             includingPropertiesForKeys:keysToRead 
                                             options:0 
                                             errorHandler:^BOOL(NSURL *url, NSError *error) {
-                                                return NO;
+                                                NSLog(@"error=%@", error);
+                                                return YES;
                                             }];
     
     DUFolderInfo *currentFolder = rootFolder;

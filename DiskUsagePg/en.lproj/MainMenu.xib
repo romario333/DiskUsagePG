@@ -1343,7 +1343,7 @@
 							<string key="NSFrame">{{658, 525}, {151, 32}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="670830500"/>
+							<reference key="NSNextKeyView" ref="540139687"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="848297253">
 								<int key="NSCellFlags">67239424</int>
@@ -1369,6 +1369,7 @@
 							<string key="NSFrame">{{398, 48}, {652, 465}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSClassName">DURingChartView</string>
 						</object>
 						<object class="NSTextField" id="71506785">
@@ -1422,7 +1423,7 @@
 											<string key="NSFrameSize">{368, 447}</string>
 											<reference key="NSSuperview" ref="970542409"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="458168432"/>
+											<reference key="NSNextKeyView" ref="860401811"/>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTableHeaderView" key="NSHeaderView" id="655408908">
 												<reference key="NSNextResponder" ref="458168432"/>
@@ -1598,7 +1599,7 @@
 							<string key="NSFrame">{{20, 48}, {370, 465}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="970542409"/>
+							<reference key="NSNextKeyView" ref="458168432"/>
 							<int key="NSsFlags">562</int>
 							<reference key="NSVScroller" ref="860401811"/>
 							<reference key="NSHScroller" ref="98781058"/>
@@ -1614,6 +1615,7 @@
 							<string key="NSFrame">{{811, 535}, {16, 16}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView" ref="670830500"/>
 							<int key="NSpiFlags">20746</int>
 							<double key="NSMaxValue">100</double>
 						</object>
@@ -2329,14 +2331,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">_pathTextField</string>
-						<reference key="source" ref="629262577"/>
-						<reference key="destination" ref="837077343"/>
-					</object>
-					<int key="connectionID">547</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">dataSource</string>
 						<reference key="source" ref="517664789"/>
 						<reference key="destination" ref="629262577"/>
@@ -2382,6 +2376,14 @@
 						<reference key="destination" ref="627768581"/>
 					</object>
 					<int key="connectionID">566</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">_pathTextField</string>
+						<reference key="source" ref="629262577"/>
+						<reference key="destination" ref="837077343"/>
+					</object>
+					<int key="connectionID">568</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2941,10 +2943,10 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="627768581"/>
-							<reference ref="71506785"/>
 							<reference ref="724216863"/>
 							<reference ref="670830500"/>
 							<reference ref="540139687"/>
+							<reference ref="71506785"/>
 						</object>
 						<reference key="parent" ref="972006081"/>
 					</object>
@@ -4085,7 +4087,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">566</int>
+			<int key="maxID">568</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

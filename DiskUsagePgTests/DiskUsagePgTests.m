@@ -27,29 +27,37 @@ void DULogFolderInfo(DUFolderInfo *folder);
     [super tearDown];
 }
 
-- (void)testTestDir
-{
-    DUScanFolderOperation *scanner = [[DUScanFolderOperation alloc] init];
-    DUFolderInfo *folder = [scanner scanFolder:[NSURL URLWithString:@"/Users/romario/tmp/testdir"]];
-    DULogFolderInfo(folder);
-}
+//- (void)testTestDir
+//{
+//    DUScanFolderOperation *scanner = [[DUScanFolderOperation alloc] init];
+//    DUFolderInfo *folder = [scanner scanFolder:[NSURL URLWithString:@"/Users/romario/tmp/testdir"]];
+//    DULogFolderInfo(folder);
+//}
+//
+//- (void)testFolderInfoSorting
+//{
+//    NSArray *folders = [NSArray arrayWithObjects:
+//                        [DUFolderInfo folderInfoWithURL:[NSURL URLWithString:@"test2"]],
+//                        [DUFolderInfo folderInfoWithURL:[NSURL URLWithString:@"test1"]],
+//                        nil];
+//    
+//    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"url.lastPathComponent" ascending:YES];
+//    NSArray *sortedFolders = [folders sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
+//    
+//    for (DUFolderInfo *folder in sortedFolders)
+//    {
+//        NSLog(@"%@", [folder.url lastPathComponent]);
+//    }
+//
+//                        
+//}
 
-- (void)testFolderInfoSorting
+- (void)testColorList
 {
-    NSArray *folders = [NSArray arrayWithObjects:
-                        [DUFolderInfo folderInfoWithURL:[NSURL URLWithString:@"test2"]],
-                        [DUFolderInfo folderInfoWithURL:[NSURL URLWithString:@"test1"]],
-                        nil];
-    
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"url.lastPathComponent" ascending:YES];
-    NSArray *sortedFolders = [folders sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
-    
-    for (DUFolderInfo *folder in sortedFolders)
-    {
-        NSLog(@"%@", [folder.url lastPathComponent]);
-    }
-
-                        
+    // Apple
+    // System
+    // Crayons
+    NSLog(@"And they are: %@", [[NSColorList colorListNamed:@"Web Safe Colors"] allKeys]);
 }
 
 //- (void)testTestHome

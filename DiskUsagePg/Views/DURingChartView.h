@@ -10,7 +10,7 @@
 #import <CorePlot/CorePlot.h>
 #import "DURingChartDataSource.h"
 
-@interface DURingChartView : CPLayerHostingView <CPPlotDataSource> {
+@interface DURingChartView : CPLayerHostingView <CPPieChartDataSource> {
 @private
     CPXYGraph *_graph;
     CPPieChart *_piePlot;

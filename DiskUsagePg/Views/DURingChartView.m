@@ -63,10 +63,12 @@ static NSString *kSectorColor = @"sectorColor";
         // TODO: co takhle setrit pameti a mit tu NSInteger?
         NSNumber *sectorValue = [_dataSource ringChartView:self sectorValueForItem:item];
         id sectorDescription = [_dataSource ringChartView:self sectorDescriptionForItem:item];
+        NSColor *sectorColor = [_dataSource ringChartView:self sectorColorForItem:item];
         
         [_dataSourceCache addObject:[NSDictionary dictionaryWithObjectsAndKeys:
                                      sectorValue, kSectorValue,
                                      sectorDescription, kSectorDescription,
+                                     sectorColor, kSectorColor,
                                      nil]];
     }
     
@@ -151,5 +153,24 @@ static NSString *kSectorColor = @"sectorColor";
     
     return newLayer;
 }
+
+#pragma mark - CPPieChartDataSource Members
+
+- (CPFill *)sliceFillForPieChart:(CPPieChart *)pieChart recordIndex:(NSUInteger)index
+{
+    NSColor *color = [[_dataSourceCache objectAtIndex:index] objectForKey:kSectorColor];
+    // TODO: zkusit gradient
+    return [CPFill fillWithColor:[CPColor colorWithComponentRed:[color redComponent] 
+                                                          green:[color greenComponent] 
+                                                           blue:[color blueComponent] 
+                                                          alpha:[color alphaComponent]]];
+}
+
+// TODO: prozkoumat
+//- (CPTextLayer *)sliceLabelForPieChart:(CPPieChart *)pieChart recordIndex:(NSUInteger)index
+//{
+//    return [[CPTextLayer alloc] initWithText:@"chudaci"];
+//    
+//}
 
 @end

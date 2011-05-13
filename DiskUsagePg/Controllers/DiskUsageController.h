@@ -11,19 +11,19 @@
 #import "DUScanFolderOperation.h"
 #import "DURingChartView.h"
 #import "DURingChartDataSource.h"
-#import "DUFolderInfoTopEntries.h"
-#import "DUFolderInfoView.h"
+#import "DUFolderChartData.h"
+#import "DUFolderTreeData.h"
 
 @interface DiskUsageController : NSViewController <NSOutlineViewDataSource,  DURingChartDataSource> {
 @private
-    DUFolderInfoView *_rootFolder;
-    DUFolderInfoView *_chartFolder;
+    DUFolderTreeData *_treeData;
+    DUFolderChartData *_chartData;
     
     IBOutlet NSButton *_scanOrCancelButton;
     IBOutlet NSTextFieldCell *_pathTextField;
     IBOutlet NSProgressIndicator *_progress;
-    IBOutlet DURingChartView *_diskUsageChart;
     IBOutlet NSOutlineView *_diskUsageTree;
+    IBOutlet DURingChartView *_diskUsageChart;
     
     NSOperationQueue *_backgroundQueue;
     DUScanFolderOperation *_scanFolderOperation;
