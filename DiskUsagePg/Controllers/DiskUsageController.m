@@ -26,8 +26,8 @@
     [_backgroundQueue release];
     
     // TODO: co kdyz jsem ho neinicializoval
-    [_scannedFolderInfo release];
-    [_topFolders release];
+    [_rootFolder release];
+    [_chartFolder release];
     
     [super dealloc];
 }
@@ -39,28 +39,41 @@
     
     _scanFolderOperation = [[DUScanFolderOperation alloc]initWithFolder:[NSURL URLWithString:_pathTextField.title]];
     // TODO: prejmenovat _folder
-    _scannedFolderInfo = [_scanFolderOperation.folderInfo retain];
+    _rootFolder = [[DUFolderInfoView alloc] initWithFolder:_scanFolderOperation.folderInfo];
+    _chartFolder = _rootFolder;
     [_scanFolderOperation addObserver:self forKeyPath:@"isFinished" options:NSKeyValueObservingOptionNew context:nil];
     [_backgroundQueue addOperation:_scanFolderOperation];
-
+    
+    // TODO:
+    NSAssert(_updateGUITimer == nil, @"Existing timer!");
+    _updateGUITimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(updateGUI:) userInfo:nil repeats:YES];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     [_scanFolderOperation release];
     _scanFolderOperation = nil;
-    [self performSelectorOnMainThread:@selector(updateGUI) withObject:nil waitUntilDone:NO];
+    
+    [_updateGUITimer invalidate];
+    _updateGUITimer = nil;
+    
+    [self performSelectorOnMainThread:@selector(updateGUI:) withObject:nil waitUntilDone:NO];
 }
 
-- (IBAction)updateGUI
+- (void)updateGUI:(NSTimer*)theTimer
 {
     // TODO: razeni
-    [_scannedFolderInfo sort];
-    _topFolders = [[DUFolderInfoTopEntries alloc]initWithArray:_scannedFolderInfo.subfolders shareThreshold:10];
+//    [_scannedFolderInfo sort];
+//    _topFolders = [[DUFolderInfoTopEntries alloc]initWithArray:_scannedFolderInfo.subfolders shareThreshold:10];
 
     
     // TODO: fakt musim poustet reloadData na main threadu? outlineView fungoval i bez toho, chart ale
     // mela zpozdeni pri zobrazeni
+    [_rootFolder update];
+    if (_chartFolder != _rootFolder)
+    {
+        [_chartFolder update];
+    }
     [_diskUsageChart reloadData];
     [_diskUsageTree reloadData];
 }
@@ -70,40 +83,39 @@
 #pragma mark - NSOutlineView Notifications
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
-    // TODO: leakuju tu pamet jak o zivot
-    DUFolderInfo *folder = [_diskUsageTree itemAtRow:[_diskUsageTree selectedRow]];
-    [_topFolders release];
-    _topFolders = [[DUFolderInfoTopEntries alloc]initWithArray:folder.subfolders shareThreshold:10];
-    [_diskUsageChart reloadData];
+    // TODO: nemel bych releasovat ten starej?
+    _chartFolder = [_diskUsageTree itemAtRow:[_diskUsageTree selectedRow]];
+    [self updateGUI:nil];
 }
 
 #pragma mark - NSOutlineViewDataSource Members
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
 {
-    DUFolderInfo *folder = item == nil ? _scannedFolderInfo :(DUFolderInfo *)item;
-    return [folder.subfolders objectAtIndex:index];
+    DUFolderInfoView *folder = item == nil ? _rootFolder :(DUFolderInfoView *)item;
+    // TODO: ach ten blbej mem management
+    return [[folder subfolderAtIndex:index] retain];
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
 {
-    DUFolderInfo *folder = item == nil ? _scannedFolderInfo :(DUFolderInfo *)item;
-    return [folder.subfolders count] > 0;
+    DUFolderInfoView *folder = item == nil ? _rootFolder :(DUFolderInfoView *)item;
+    return [folder subfolderCount] > 0;
 }
 
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item 
 {
-    DUFolderInfo *folder = item == nil ? _scannedFolderInfo :(DUFolderInfo *)item;
-    return [folder.subfolders count];
+    DUFolderInfoView *folder = item == nil ? _rootFolder :(DUFolderInfoView *)item;
+    return [folder subfolderCount];
 }
 
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
 {
-    DUFolderInfo *folder = item == nil ? _scannedFolderInfo :(DUFolderInfo *)item;
+    DUFolderInfoView *folderView = item == nil ? _rootFolder :(DUFolderInfoView *)item;
+    DUFolderInfo *folder = [folderView folder];
     
     if ([tableColumn.identifier isEqualTo:@"folderName"])
     {
-        NSLog(@"outlineView - loading folder %@", [folder.url lastPathComponent]);
         return [folder.url lastPathComponent];
     }
     else if ([tableColumn.identifier isEqualTo:@"folderSize"])
@@ -120,7 +132,8 @@
 
 - (id)rootItemForRingChartView:(DURingChartView *)ringChartView
 {
-    return _topFolders;
+    DUFolderInfoTopEntries *topEntries = [[DUFolderInfoTopEntries alloc] initWithArray:[_chartFolder subfolders] shareThreshold:5.0];
+    return topEntries;
 }
 
 - (id)ringChartView:(DURingChartView *)ringChartView child:(NSInteger)index ofItem:(id)item

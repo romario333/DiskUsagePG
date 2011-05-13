@@ -12,21 +12,23 @@
 #import "DURingChartView.h"
 #import "DURingChartDataSource.h"
 #import "DUFolderInfoTopEntries.h"
+#import "DUFolderInfoView.h"
 
 @interface DiskUsageController : NSViewController <NSOutlineViewDataSource,  DURingChartDataSource> {
 @private
     IBOutlet DURingChartView *_diskUsageChart;
-    DUFolderInfo *_scannedFolderInfo;
-    DUFolderInfoTopEntries *_topFolders;
+    DUFolderInfoView *_rootFolder;
+    DUFolderInfoView *_chartFolder;
     IBOutlet NSTextFieldCell *_pathTextField;
     IBOutlet NSOutlineView *_diskUsageTree;
     
     NSOperationQueue *_backgroundQueue;
     DUScanFolderOperation *_scanFolderOperation;
+    NSTimer *_updateGUITimer;
 }
 
 - (IBAction)scanFolder:(id)sender;
-- (IBAction)updateGUI;
+- (void)updateGUI:(NSTimer*)theTimer;
 
 
 @end

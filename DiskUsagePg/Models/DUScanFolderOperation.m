@@ -107,7 +107,7 @@
         {
             NSNumber *fileSize;
             [url getResourceValue:&fileSize forKey:NSURLFileSizeKey error:NULL];
-            currentFolder.size += [fileSize longValue];
+            [currentFolder addToSize:[fileSize longValue]];
         }
 
         

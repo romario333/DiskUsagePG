@@ -13,8 +13,6 @@
 @private
     DUFolderInfo *_parentFolder;
     NSURL *_url;
-    long _size;
-    
     NSMutableArray *_subfolders;
 }
 
@@ -33,6 +31,6 @@
 
 - (long)sizeWithSubfolders;
 
-- (void)sort;
+- (void)addToSize:(long) increment;
 
 @end

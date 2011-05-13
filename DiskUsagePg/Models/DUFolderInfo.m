@@ -48,7 +48,11 @@
 - (void)addSubfolder:(DUFolderInfo *)subfolder
 {
     subfolder.parentFolder = self;
-    [_subfolders addObject:subfolder];
+    // TODO: mam rozlezly synchronized vsude mozne a tohle bude taky btw asi zpomalovat
+    @synchronized(_subfolders)
+    {
+        [_subfolders addObject:subfolder];
+    }
 }
 
 - (NSArray *)subfolders
@@ -56,30 +60,20 @@
     return _subfolders;
 }
 
-- (long)sizeWithSubfolders
-{
-    long totalSize = self.size;
-    for (DUFolderInfo *subfolder in _subfolders)
-    {
-        totalSize += [subfolder sizeWithSubfolders];
-    }
-    return totalSize;
-}
-
 - (NSString *)description
 {
     return [_url path];
 }
 
-- (void)sort
+- (long)sizeWithSubfolders
 {
-    NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"sizeWithSubfolders" ascending:NO];
-    [_subfolders sortUsingDescriptors:[NSArray arrayWithObject:sortDesc]];
-    
-    for (DUFolderInfo *subfolder in _subfolders)
-    {
-        [subfolder sort];
-    }
+    return _size;
+}
+
+- (void)addToSize:(long)increment
+{
+    _size += increment;
+    [_parentFolder addToSize:increment];
 }
 
 @end

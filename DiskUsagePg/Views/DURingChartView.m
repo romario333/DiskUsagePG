@@ -123,7 +123,6 @@ static NSString *kSectorColor = @"sectorColor";
 
 -(NSUInteger)numberOfRecordsForPlot:(CPPlot *)plot
 {
-    NSLog(@"numberOfRecordsForPlot in plot is %lu", [_dataSourceCache count]);
     return [_dataSourceCache count];
 }
 
@@ -149,10 +148,6 @@ static NSString *kSectorColor = @"sectorColor";
     id sectorDescription = [[_dataSourceCache objectAtIndex:index] objectForKey:kSectorDescription];
     
     newLayer = [[[CPTextLayer alloc] initWithText:[sectorDescription description] style:whiteText] autorelease];
-    
-    NSLog(@"sectorDescription is %@", sectorDescription);
-
-    
     
     return newLayer;
 }

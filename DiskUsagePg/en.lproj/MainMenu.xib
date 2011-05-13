@@ -20,6 +20,7 @@
 			<string>NSScrollView</string>
 			<string>NSButtonCell</string>
 			<string>NSButton</string>
+			<string>NSProgressIndicator</string>
 			<string>NSOutlineView</string>
 			<string>NSCustomView</string>
 			<string>NSCustomObject</string>
@@ -1366,7 +1367,6 @@
 							<int key="NSvFlags">274</int>
 							<string key="NSFrame">{{398, 48}, {652, 465}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSClassName">DURingChartView</string>
 						</object>
 						<object class="NSTextField" id="71506785">
@@ -1418,7 +1418,7 @@
 											<int key="NSvFlags">256</int>
 											<string key="NSFrameSize">{368, 447}</string>
 											<reference key="NSSuperview" ref="970542409"/>
-											<reference key="NSNextKeyView" ref="860401811"/>
+											<reference key="NSNextKeyView" ref="458168432"/>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTableHeaderView" key="NSHeaderView" id="655408908">
 												<reference key="NSNextResponder" ref="458168432"/>
@@ -1587,7 +1587,7 @@
 							</object>
 							<string key="NSFrame">{{20, 48}, {370, 465}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
-							<reference key="NSNextKeyView" ref="458168432"/>
+							<reference key="NSNextKeyView" ref="970542409"/>
 							<int key="NSsFlags">562</int>
 							<reference key="NSVScroller" ref="860401811"/>
 							<reference key="NSHScroller" ref="98781058"/>
@@ -1595,6 +1595,15 @@
 							<reference key="NSHeaderClipView" ref="458168432"/>
 							<reference key="NSCornerView" ref="778117234"/>
 							<bytes key="NSScrollAmts">QSAAAEEgAABBmAAAQZgAAA</bytes>
+						</object>
+						<object class="NSProgressIndicator" id="540139687">
+							<reference key="NSNextResponder" ref="439893737"/>
+							<int key="NSvFlags">1292</int>
+							<object class="NSPSMatrix" key="NSDrawMatrix"/>
+							<string key="NSFrame">{{811, 535}, {16, 16}}</string>
+							<reference key="NSSuperview" ref="439893737"/>
+							<int key="NSpiFlags">20746</int>
+							<double key="NSMaxValue">100</double>
 						</object>
 					</object>
 					<string key="NSFrame">{{7, 11}, {1070, 573}}</string>
@@ -2906,6 +2915,7 @@
 							<reference ref="71506785"/>
 							<reference ref="724216863"/>
 							<reference ref="670830500"/>
+							<reference ref="540139687"/>
 						</object>
 						<reference key="parent" ref="972006081"/>
 					</object>
@@ -3498,6 +3508,11 @@
 						<reference key="object" ref="943336390"/>
 						<reference key="parent" ref="423715825"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">564</int>
+						<reference key="object" ref="540139687"/>
+						<reference key="parent" ref="439893737"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -3731,6 +3746,7 @@
 					<string>552.IBPluginDependency</string>
 					<string>56.IBPluginDependency</string>
 					<string>56.ImportedFromIB2</string>
+					<string>564.IBPluginDependency</string>
 					<string>57.IBEditorWindowLastContentRect</string>
 					<string>57.IBPluginDependency</string>
 					<string>57.ImportedFromIB2</string>
@@ -3993,6 +4009,7 @@
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>{{286, 129}, {275, 183}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
@@ -4039,7 +4056,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">563</int>
+			<int key="maxID">564</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
