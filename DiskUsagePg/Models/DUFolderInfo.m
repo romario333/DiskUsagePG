@@ -11,7 +11,7 @@
 
 @implementation DUFolderInfo
 
-@synthesize parentFolder = _parentFolder, url = _url, size = _size;
+@synthesize parentFolder = _parentFolder, url = _url;
 
 - (id)init
 {
@@ -57,7 +57,10 @@
 
 - (NSArray *)subfolders
 {
-    return _subfolders;
+    @synchronized(_subfolders)
+    {
+        return [_subfolders copy];
+    }
 }
 
 - (NSString *)description
@@ -65,7 +68,7 @@
     return [_url path];
 }
 
-- (long)sizeWithSubfolders
+- (long)size
 {
     return _size;
 }

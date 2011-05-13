@@ -37,6 +37,12 @@
     
     NSAssert(_scanFolderOperation == nil, @"Existing scan operation in progress?");
     
+    [_pathTextField setEnabled:NO];
+    // TODO:
+    [_scanOrCancelButton setTitle:@"Cancel"];
+    [_progress startAnimation:self];
+    [_progress setHidden:NO];
+    
     _scanFolderOperation = [[DUScanFolderOperation alloc]initWithFolder:[NSURL URLWithString:_pathTextField.title]];
     // TODO: prejmenovat _folder
     _rootFolder = [[DUFolderInfoView alloc] initWithFolder:_scanFolderOperation.folderInfo];
@@ -51,15 +57,29 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
+    [self performSelectorOnMainThread:@selector(scanFolderCompleted) withObject:nil waitUntilDone:NO];
+}
+
+- (void)scanFolderCompleted
+{
     [_scanFolderOperation release];
     _scanFolderOperation = nil;
     
     [_updateGUITimer invalidate];
     _updateGUITimer = nil;
     
-    [self performSelectorOnMainThread:@selector(updateGUI:) withObject:nil waitUntilDone:NO];
+    [self updateGUI:nil];
+    
+    [_pathTextField setEnabled:YES];
+    // TODO:
+    [_scanOrCancelButton setTitle:@"Scan Folder"];
+    [_progress setHidden:YES];
+    [_progress stopAnimation:self];
+
+    
 }
 
+// TODO: volat z timeru pres notfication, abych tu nemusel mit ten parametr
 - (void)updateGUI:(NSTimer*)theTimer
 {
     // TODO: razeni
@@ -120,7 +140,7 @@
     }
     else if ([tableColumn.identifier isEqualTo:@"folderSize"])
     {
-        return unitStringFromBytes([folder sizeWithSubfolders], kUnitStringOSNativeUnits | kUnitStringLocalizedFormat);
+        return unitStringFromBytes([folder size], kUnitStringOSNativeUnits | kUnitStringLocalizedFormat);
     }
     
     return nil;
@@ -151,7 +171,7 @@
 - (NSNumber *)ringChartView:(DURingChartView *)ringChartView sectorValueForItem:(id)item
 {
     DUFolderInfo *folder = (DUFolderInfo *)item;
-    return [NSNumber numberWithLong:[folder sizeWithSubfolders]];
+    return [NSNumber numberWithLong:[folder size]];
 }
 
 - (id)ringChartView:(DURingChartView *)ringChartView sectorDescriptionForItem:(id)item
@@ -169,7 +189,7 @@
         folderName = @"Others";
     }
     
-    NSString *folderSize = unitStringFromBytes([folder sizeWithSubfolders], kUnitStringOSNativeUnits | kUnitStringLocalizedFormat);
+    NSString *folderSize = unitStringFromBytes([folder size], kUnitStringOSNativeUnits | kUnitStringLocalizedFormat);
     
     return [NSString stringWithFormat:@"%@ (%@)", folderName, folderSize];
 }

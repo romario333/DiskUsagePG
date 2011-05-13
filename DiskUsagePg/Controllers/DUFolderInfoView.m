@@ -32,12 +32,9 @@
     if (_sortedSubfolders != nil) {
         [_sortedSubfolders release];
     }
-    NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"sizeWithSubfolders" ascending:NO];
+    NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"size" ascending:NO];
 
-    @synchronized(_folder.subfolders)
-    {
-        _sortedSubfolders = [_folder.subfolders mutableCopy];  
-    }
+    _sortedSubfolders = [_folder.subfolders mutableCopy];  
     
     
     [_sortedSubfolders sortUsingDescriptors:[NSArray arrayWithObject:sortDesc]];

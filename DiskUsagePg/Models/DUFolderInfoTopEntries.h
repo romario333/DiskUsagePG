@@ -13,6 +13,7 @@
 @private
     NSArray *_originalEntries;
     NSUInteger _shareThreshold;
+    NSDictionary *_colorForEntry;
 }
 
 - (id)initWithArray:(NSArray *)folders shareThreshold:(NSUInteger)shareThreshold;
@@ -22,9 +23,9 @@
 
 @interface DUFolderInfoOthersEntry : NSObject {
 @private
-    long sizeWithSubfolders;
+    long size;
 }
 
-@property (nonatomic) long sizeWithSubfolders;
+@property (nonatomic) long size;
 
 @end

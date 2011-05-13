@@ -16,10 +16,13 @@
 
 @interface DiskUsageController : NSViewController <NSOutlineViewDataSource,  DURingChartDataSource> {
 @private
-    IBOutlet DURingChartView *_diskUsageChart;
     DUFolderInfoView *_rootFolder;
     DUFolderInfoView *_chartFolder;
+    
+    IBOutlet NSButton *_scanOrCancelButton;
     IBOutlet NSTextFieldCell *_pathTextField;
+    IBOutlet NSProgressIndicator *_progress;
+    IBOutlet DURingChartView *_diskUsageChart;
     IBOutlet NSOutlineView *_diskUsageTree;
     
     NSOperationQueue *_backgroundQueue;
@@ -28,6 +31,7 @@
 }
 
 - (IBAction)scanFolder:(id)sender;
+- (void)scanFolderCompleted;
 - (void)updateGUI:(NSTimer*)theTimer;
 
 

@@ -14,6 +14,7 @@
     DUFolderInfo *_parentFolder;
     NSURL *_url;
     NSMutableArray *_subfolders;
+    long _size;
 }
 
 // TODO: vyzkouset pak, o kolik to zrychli nonatomic
@@ -21,7 +22,6 @@
 
 @property (assign) DUFolderInfo *parentFolder;
 @property (retain, readonly) NSURL *url;
-@property long size;
 
 - (id)initWithURL:(NSURL *)url;
 + (id)folderInfoWithURL:(NSURL *)url;
@@ -29,7 +29,7 @@
 - (void)addSubfolder:(DUFolderInfo *)subfolder;
 - (NSArray *)subfolders;
 
-- (long)sizeWithSubfolders;
+- (long)size;
 
 - (void)addToSize:(long) increment;
 

@@ -11,12 +11,19 @@
 
 @implementation DUFolderInfoTopEntries
 
++ (void)initialize
+{
+    [super initialize];
+}
+
 - (id)initWithArray:(NSArray *)folders shareThreshold:(NSUInteger)shareThreshold
 {
+    
     self = [super init];
     if (self) {
         _originalEntries = [folders retain];
         _shareThreshold = shareThreshold;
+        _colorForEntry = [[NSMutableDictionary alloc] init];
     }
     
     return self;
@@ -25,6 +32,7 @@
 - (void)dealloc
 {
     [_originalEntries release];
+    [_colorForEntry release];
     [super dealloc];
 }
 
@@ -36,12 +44,12 @@
     long totalSize = 0;
     for (DUFolderInfo *folder in _originalEntries)
     {
-        totalSize += [folder sizeWithSubfolders];
+        totalSize += [folder size];
     }
     
     for (DUFolderInfo *folder in _originalEntries)
     {
-        double folderShare = [folder sizeWithSubfolders] / (double)totalSize;
+        double folderShare = [folder size] / (double)totalSize;
         NSUInteger folderShareInt = (NSUInteger)(folderShare * 100);
         if (folderShareInt > _shareThreshold)
         {
@@ -49,11 +57,11 @@
         }
         else
         {
-            others.sizeWithSubfolders += [folder sizeWithSubfolders];
+            others.size += [folder size];
         }
     }
     
-    if (others.sizeWithSubfolders > 0)
+    if (others.size > 0)
     {
         [topEntries addObject:others];
     }
@@ -64,6 +72,6 @@
 @end
 
 @implementation DUFolderInfoOthersEntry
-@synthesize sizeWithSubfolders;
+@synthesize size;
 @end
 
