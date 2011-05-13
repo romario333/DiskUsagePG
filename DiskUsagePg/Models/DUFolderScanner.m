@@ -11,11 +11,13 @@
 
 @implementation DUFolderScanner
 
-- (id)init
+@synthesize folderInfo = _folderInfo;
+
+- (id)initWithFolder:(NSURL *)folderURL
 {
     self = [super init];
     if (self) {
-        
+        _folderInfo = [[DUFolderInfo alloc] initWithURL:folderURL];
     }
     
     return self;
@@ -23,20 +25,35 @@
 
 - (void)dealloc
 {
+    [_folderInfo release];
     [super dealloc];
 }
 
-- (DUFolderInfo *)scanFolder:(NSURL *)folderUrl
+- (void)main {
+    @try {
+        NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+        
+        [self _scanFolder];
+        
+        [pool release];
+    }
+    @catch(...) {
+        // TODO: co to aspon nekam zapsat?
+        // Do not rethrow exceptions.
+    }    
+}
+
+- (void)_scanFolder
 {
     // TODO: kontrola, ze folderUrl existuje, je to adresar
     
-    DUFolderInfo *rootFolder = [[DUFolderInfo alloc] initWithURL:folderUrl];
+    DUFolderInfo *rootFolder = _folderInfo;
     
     // TODO: existuje i NSURLFileAllocatedSizeKey
     NSArray *keysToRead = [NSArray arrayWithObjects:NSURLIsDirectoryKey, NSURLFileSizeKey, nil];
     NSFileManager *fileManager = [[NSFileManager alloc] init];
     NSDirectoryEnumerator *dirEnumerator = [fileManager
-                                            enumeratorAtURL:folderUrl 
+                                            enumeratorAtURL:rootFolder.url 
                                             includingPropertiesForKeys:keysToRead 
                                             options:0 
                                             errorHandler:^BOOL(NSURL *url, NSError *error) {
@@ -48,6 +65,11 @@
     DUFolderInfo *subfolder = nil;
     for (NSURL *url in dirEnumerator)
     {
+        if ([self isCancelled])
+		{
+			break;	// user cancelled this operation
+		}
+        
         NSNumber *isDirectory = nil;
         [url getResourceValue:&isDirectory forKey:NSURLIsDirectoryKey error:NULL];
 
@@ -92,9 +114,6 @@
     }
     
     [fileManager release];
-    
-    // TODO: tohle jako fakt a proc me nevaruje clang?
-    return [rootFolder autorelease];
 }
 
 @end

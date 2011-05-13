@@ -20,9 +20,13 @@
     DUFolderInfoTopEntries *_topFolders;
     IBOutlet NSTextFieldCell *_pathTextField;
     IBOutlet NSOutlineView *_diskUsageTree;
+    
+    NSOperationQueue *_backgroundQueue;
+    DUFolderScanner *_scanFolderOperation;
 }
 
 - (IBAction)scanFolder:(id)sender;
+- (IBAction)updateGUI;
 
 
 @end

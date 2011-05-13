@@ -9,12 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "DUFolderInfo.h"
 
-
-@interface DUFolderScanner : NSObject {
+// TODO: rename na DUScanFolderOperation
+@interface DUFolderScanner : NSOperation {
 @private
-    
+    DUFolderInfo *_folderInfo;
 }
 
-- (DUFolderInfo *)scanFolder:(NSURL *)folderUrl;
+- (id)initWithFolder:(NSURL *)folderURL;
+
+- (void)_scanFolder;
+
+@property (readonly) DUFolderInfo *folderInfo;
 
 @end

@@ -25,7 +25,6 @@
 		62BAAE3B137A59D40086BE25 /* DUFolderInfoTopEntries.m in Sources */ = {isa = PBXBuildFile; fileRef = 62BAAE3A137A59D40086BE25 /* DUFolderInfoTopEntries.m */; };
 		62BAAE40137A67FE0086BE25 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BAAE3F137A67FE0086BE25 /* CorePlot.framework */; };
 		62BAAE43137B15F00086BE25 /* CorePlot.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 62BAAE3F137A67FE0086BE25 /* CorePlot.framework */; };
-		62FCFB9D13767D840044BCF6 /* DUDiskUsagePieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 62FCFB9C13767D840044BCF6 /* DUDiskUsagePieChart.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,8 +84,6 @@
 		62BAAE39137A59D40086BE25 /* DUFolderInfoTopEntries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DUFolderInfoTopEntries.h; path = Models/DUFolderInfoTopEntries.h; sourceTree = "<group>"; };
 		62BAAE3A137A59D40086BE25 /* DUFolderInfoTopEntries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DUFolderInfoTopEntries.m; path = Models/DUFolderInfoTopEntries.m; sourceTree = "<group>"; };
 		62BAAE3F137A67FE0086BE25 /* CorePlot.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CorePlot.framework; sourceTree = "<group>"; };
-		62FCFB9B13767D840044BCF6 /* DUDiskUsagePieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DUDiskUsagePieChart.h; path = Views/DUDiskUsagePieChart.h; sourceTree = "<group>"; };
-		62FCFB9C13767D840044BCF6 /* DUDiskUsagePieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DUDiskUsagePieChart.m; path = Views/DUDiskUsagePieChart.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,8 +219,6 @@
 		62FCFB9A13767D520044BCF6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				62FCFB9B13767D840044BCF6 /* DUDiskUsagePieChart.h */,
-				62FCFB9C13767D840044BCF6 /* DUDiskUsagePieChart.m */,
 				62953F061379A8F000478458 /* DURingChartView.h */,
 				62953F071379A8F000478458 /* DURingChartView.m */,
 				62953F091379A96800478458 /* DURingChartDataSource.h */,
@@ -344,7 +339,6 @@
 				625605F41375A94200C94C21 /* DUFolderScanner.m in Sources */,
 				625605F51375A94200C94C21 /* DUFolderInfo.m in Sources */,
 				625605F81375A97900C94C21 /* DiskUsageController.m in Sources */,
-				62FCFB9D13767D840044BCF6 /* DUDiskUsagePieChart.m in Sources */,
 				62953F081379A8F000478458 /* DURingChartView.m in Sources */,
 				62BAAE3B137A59D40086BE25 /* DUFolderInfoTopEntries.m in Sources */,
 			);

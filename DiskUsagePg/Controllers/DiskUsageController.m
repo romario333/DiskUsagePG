@@ -14,6 +14,8 @@
 
 - (void)awakeFromNib
 {
+    _backgroundQueue = [[NSOperationQueue alloc] init];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outlineViewSelectionDidChange:) name:NSOutlineViewSelectionDidChangeNotification object:_diskUsageTree];
     
     _pathTextField.title = NSHomeDirectory();
@@ -21,6 +23,8 @@
 
 - (void)dealloc
 {
+    [_backgroundQueue release];
+    
     // TODO: co kdyz jsem ho neinicializoval
     [_folder release];
     [_topFolders release];
@@ -31,19 +35,37 @@
 - (IBAction)scanFolder:(id)sender {
     // TODO: samozrejme kontrolovat, ze je zadana validni hodnota
     
-    DUFolderScanner *folderScanner = [[DUFolderScanner alloc]init];
-    _folder = [folderScanner scanFolder:[NSURL URLWithString:_pathTextField.title]];
-    [_folder retain];
-    [_folder sort];
-    [folderScanner release];
+    NSAssert(_scanFolderOperation == nil, @"Existing scan operation in progress?");
     
-    _topFolders = [[DUFolderInfoTopEntries alloc]initWithArray:_folder.subfolders shareThreshold:10];
-
-    // TODO: nastavovat data-sources vsude stejne
-    [_diskUsageChart reloadData];
-    [_diskUsageTree reloadData];
+    _scanFolderOperation = [[DUFolderScanner alloc]initWithFolder:[NSURL URLWithString:_pathTextField.title]];
+    // TODO: prejmenovat _folder
+    _folder = [_scanFolderOperation.folderInfo retain];
+    [_scanFolderOperation addObserver:self forKeyPath:@"isFinished" options:NSKeyValueObservingOptionNew context:nil];
+    [_backgroundQueue addOperation:_scanFolderOperation];
 
 }
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    [_scanFolderOperation release];
+    _scanFolderOperation = nil;
+    [self performSelectorOnMainThread:@selector(updateGUI) withObject:nil waitUntilDone:NO];
+}
+
+- (IBAction)updateGUI
+{
+    // TODO: razeni
+    [_folder sort];
+    _topFolders = [[DUFolderInfoTopEntries alloc]initWithArray:_folder.subfolders shareThreshold:10];
+
+    
+    // TODO: fakt musim poustet reloadData na main threadu? outlineView fungoval i bez toho, chart ale
+    // mela zpozdeni pri zobrazeni
+    [_diskUsageChart reloadData];
+    [_diskUsageTree reloadData];
+}
+
+
 
 #pragma mark - NSOutlineView Notifications
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
@@ -81,6 +103,7 @@
     
     if ([tableColumn.identifier isEqualTo:@"folderName"])
     {
+        NSLog(@"outlineView - loading folder %@", [folder.url lastPathComponent]);
         return [folder.url lastPathComponent];
     }
     else if ([tableColumn.identifier isEqualTo:@"folderSize"])
