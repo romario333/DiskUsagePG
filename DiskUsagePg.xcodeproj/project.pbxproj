@@ -113,7 +113,6 @@
 		625604171374635C00C94C21 = {
 			isa = PBXGroup;
 			children = (
-				62BAAE3F137A67FE0086BE25 /* CorePlot.framework */,
 				6256042C1374635C00C94C21 /* DiskUsagePg */,
 				6256044A1374635D00C94C21 /* DiskUsagePgTests */,
 				625604251374635C00C94C21 /* Frameworks */,
@@ -142,6 +141,7 @@
 		625604281374635C00C94C21 /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				62BAAE3F137A67FE0086BE25 /* CorePlot.framework */,
 				625604291374635C00C94C21 /* AppKit.framework */,
 				6256042A1374635C00C94C21 /* CoreData.framework */,
 				6256042B1374635C00C94C21 /* Foundation.framework */,

@@ -59,12 +59,7 @@
         if (dirEnumerator.level > currentLevel)
         {
             // we're going deeper in folder hierarchy
-            
-            // TODO: NSAssert considered harmful, proc?
-            // TODO: proc to nejde strcit dovnitr NSAssertu?
-            NSString *assertDesc = [NSString stringWithFormat:@"'%@' expected, got '%@' instead.", subfolder.url, url];
-            NSAssert([[url URLByDeletingLastPathComponent] isEqualTo:subfolder.url], assertDesc);
-            
+            NSAssert([[url URLByDeletingLastPathComponent] isEqualTo:subfolder.url], ([NSString stringWithFormat:@"'%@' expected, got '%@' instead.", subfolder.url, url]));
             currentFolder = subfolder;
             subfolder = nil;
         }
