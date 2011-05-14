@@ -26,7 +26,7 @@
     [_backgroundQueue release];
     
     // TODO: co kdyz jsem ho neinicializoval
-    [_treeData release];
+    [_treeDataRoot release];
     [_chartData release];
     
     [super dealloc];
@@ -38,7 +38,7 @@
     NSAssert(_scanFolderOperation == nil, @"Existing scan operation in progress?");
     _scanFolderOperation = [[DUScanFolderOperation alloc]initWithFolder:[NSURL URLWithString:_pathTextField.title]];
     // TODO: prejmenovat _folder
-    _treeData = [[DUFolderTreeData alloc] initWithFolder:_scanFolderOperation.folderInfo];
+    _treeDataRoot = [[DUFolderTreeDataItem alloc] initWithFolder:_scanFolderOperation.folderInfo];
     _chartData = [[DUFolderChartData alloc] initWithFolder: _scanFolderOperation.folderInfo shareThreshold:5.0];
     [_scanFolderOperation addObserver:self forKeyPath:@"isFinished" options:NSKeyValueObservingOptionNew context:nil];
     [_backgroundQueue addOperation:_scanFolderOperation];
@@ -78,6 +78,7 @@
 }
 
 // TODO: volat z timeru pres notfication, abych tu nemusel mit ten parametr
+
 - (void)updateGUI:(NSTimer*)theTimer
 {
     // TODO: razeni
@@ -87,7 +88,7 @@
     
     // TODO: fakt musim poustet reloadData na main threadu? outlineView fungoval i bez toho, chart ale
     // mela zpozdeni pri zobrazeni
-    [_treeData update];
+    [_treeDataRoot update];
     [_chartData update];
     
     [_diskUsageTree reloadData];
@@ -99,38 +100,38 @@
 #pragma mark - NSOutlineView Notifications
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
-    [_chartData release];
-    DUFolderInfo *selectedFolder = [[_diskUsageTree itemAtRow:[_diskUsageTree selectedRow]] folder];
-    // TODO: threshold na 2 mistech
-    _chartData = [[DUFolderChartData alloc] initWithFolder:selectedFolder shareThreshold:5.0];
-    
-    [self updateGUI:nil];
+//    [_chartData release];
+//    DUFolderInfo *selectedFolder = [[_diskUsageTree itemAtRow:[_diskUsageTree selectedRow]] folder];
+//    // TODO: threshold na 2 mistech
+//    _chartData = [[DUFolderChartData alloc] initWithFolder:selectedFolder shareThreshold:5.0];
+//    
+//    [self updateGUI:nil];
 }
 
 #pragma mark - NSOutlineViewDataSource Members
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
 {
-    DUFolderTreeData *folder = item == nil ? _treeData :(DUFolderTreeData *)item;
+    DUFolderTreeDataItem *folder = item == nil ? _treeDataRoot :(DUFolderTreeDataItem *)item;
     // TODO: ach ten blbej mem management
     return [[folder subfolderAtIndex:index] retain];
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
 {
-    DUFolderTreeData *folder = item == nil ? _treeData :(DUFolderTreeData *)item;
+    DUFolderTreeDataItem *folder = item == nil ? _treeDataRoot :(DUFolderTreeDataItem *)item;
     return [folder subfolderCount] > 0;
 }
 
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item 
 {
-    DUFolderTreeData *folder = item == nil ? _treeData :(DUFolderTreeData *)item;
+    DUFolderTreeDataItem *folder = item == nil ? _treeDataRoot :(DUFolderTreeDataItem *)item;
     return [folder subfolderCount];
 }
 
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
 {
-    DUFolderTreeData *folderView = item == nil ? _treeData :(DUFolderTreeData *)item;
+    DUFolderTreeDataItem *folderView = item == nil ? _treeDataRoot :(DUFolderTreeDataItem *)item;
     DUFolderInfo *folder = [folderView folder];
     
     if ([tableColumn.identifier isEqualTo:@"folderName"])
@@ -143,6 +144,21 @@
     }
     
     return nil;
+}
+
+#pragma mark - NSOutlineViewDelegate Members
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item
+{
+    [_chartData release];
+    DUFolderTreeDataItem *selectedFolder = (DUFolderTreeDataItem *)item;
+    // TODO: threshold na 2 mistech
+    _chartData = [[DUFolderChartData alloc] initWithFolder:selectedFolder.folder shareThreshold:5.0];
+    [_chartData update]; // TODO: tenhle update krok bych mohl odstranit
+    
+    [_diskUsageChart reloadData];
+    
+    return YES;
 }
 
 #pragma mark - DURingChartDataSource Members
@@ -189,5 +205,7 @@
     DUFolderChartSector *sector = (DUFolderChartSector *)item;
     return sector.color;
 }
+
+
 
 @end

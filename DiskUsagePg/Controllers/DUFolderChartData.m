@@ -22,11 +22,13 @@
         _sectorsCache = [[NSMapTable alloc] initWithKeyOptions:NSMapTableStrongMemory valueOptions:NSMapTableStrongMemory capacity:50];
         
         _colors = [[NSMutableArray alloc] init];
-        NSColorList *colorList = [NSColorList colorListNamed:@"Apple"];
+        // TODO: kde beru jistotu, ze tam neco takovyho bude?
+        NSColorList *colorList = [NSColorList colorListNamed:@"Web Safe Colors"];
         for (NSString *colorKey in [colorList allKeys])
         {
             [_colors addObject:[colorList colorWithKey:colorKey]];
         }
+        _nextColor = 16;
         
     }
     
