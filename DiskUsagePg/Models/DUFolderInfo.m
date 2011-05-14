@@ -8,7 +8,6 @@
 
 #import "DUFolderInfo.h"
 
-
 @implementation DUFolderInfo
 
 @synthesize parentFolder = _parentFolder, url = _url;
@@ -45,7 +44,7 @@
     return folderInfo;
 }
 
-- (void)addSubfolder:(DUFolderInfo *)subfolder
+- (void)addSubfolder:(DUFolderInfo *) subfolder
 {
     subfolder.parentFolder = self;
     // TODO: mam rozlezly synchronized vsude mozne a tohle bude taky btw asi zpomalovat

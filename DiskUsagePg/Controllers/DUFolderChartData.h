@@ -30,6 +30,9 @@
 
 @interface DUFolderChartSector : NSObject {
 @private
+    DUFolderInfo *_folder;
+    long _size;
+    NSColor *_color;
 }
 
 - (id)initWithFolder:(DUFolderInfo *)folder size:(long)size;

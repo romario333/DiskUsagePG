@@ -45,6 +45,7 @@
             [_childrenCache addObject:child];
             [child release];
         }
+        [subfolders release];
 
     }
     return _childrenCache;

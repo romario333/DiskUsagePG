@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface DUFolderInfo : NSObject {
 @private
     DUFolderInfo *_parentFolder;

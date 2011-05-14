@@ -12,6 +12,10 @@
 // TODO: nemohl by tohle nahradit NSArrayController ?
 @interface DUFolderTreeItem : NSObject {
 @private
+    BOOL _isExpanded;
+    BOOL _isSelected;
+    DUFolderInfo *_folder;
+    
     NSMutableArray *_childrenCache;
 }
 

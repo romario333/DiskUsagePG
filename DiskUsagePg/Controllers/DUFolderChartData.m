@@ -94,6 +94,7 @@
         [sectorCandidates addObject: sectorCandidate];
         [sectorCandidate release];
     }
+    [subfolders release];
     
     long totalSize = 0;
     for (DUFolderChartSector *sectorCandidate in sectorCandidates)
