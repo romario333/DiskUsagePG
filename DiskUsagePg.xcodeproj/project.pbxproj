@@ -21,8 +21,10 @@
 		625605F41375A94200C94C21 /* DUScanFolderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 625605F01375A94200C94C21 /* DUScanFolderOperation.m */; };
 		625605F51375A94200C94C21 /* DUFolderInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 625605F11375A94200C94C21 /* DUFolderInfo.m */; };
 		625605F81375A97900C94C21 /* DiskUsageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 625605F71375A97900C94C21 /* DiskUsageController.m */; };
+		628ACA33137D94B6006CE711 /* DUFolderChartData.m in Sources */ = {isa = PBXBuildFile; fileRef = 628ACA31137D94B6006CE711 /* DUFolderChartData.m */; };
 		62953F081379A8F000478458 /* DURingChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62953F071379A8F000478458 /* DURingChartView.m */; };
-		62BAAE3B137A59D40086BE25 /* DUFolderInfoTopEntries.m in Sources */ = {isa = PBXBuildFile; fileRef = 62BAAE3A137A59D40086BE25 /* DUFolderInfoTopEntries.m */; };
+		62B21EDD137E87B30004438C /* DUFolderTreeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 62B21EDC137E87B30004438C /* DUFolderTreeItem.m */; };
+		62B21EE7137ED8580004438C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 62B21EE6137ED8580004438C /* .gitignore */; };
 		62BAAE40137A67FE0086BE25 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BAAE3F137A67FE0086BE25 /* CorePlot.framework */; };
 		62BAAE43137B15F00086BE25 /* CorePlot.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 62BAAE3F137A67FE0086BE25 /* CorePlot.framework */; };
 /* End PBXBuildFile section */
@@ -77,12 +79,15 @@
 		625605F31375A94200C94C21 /* DUScanFolderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DUScanFolderOperation.h; path = Models/DUScanFolderOperation.h; sourceTree = "<group>"; };
 		625605F61375A97900C94C21 /* DiskUsageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiskUsageController.h; path = Controllers/DiskUsageController.h; sourceTree = "<group>"; };
 		625605F71375A97900C94C21 /* DiskUsageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DiskUsageController.m; path = Controllers/DiskUsageController.m; sourceTree = "<group>"; };
+		628ACA31137D94B6006CE711 /* DUFolderChartData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DUFolderChartData.m; path = Controllers/DUFolderChartData.m; sourceTree = "<group>"; };
+		628ACA32137D94B6006CE711 /* DUFolderChartData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DUFolderChartData.h; path = Controllers/DUFolderChartData.h; sourceTree = "<group>"; };
 		62953F031379A61700478458 /* DataFormatingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataFormatingUtils.h; sourceTree = "<group>"; };
 		62953F061379A8F000478458 /* DURingChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DURingChartView.h; path = Views/DURingChartView.h; sourceTree = "<group>"; };
 		62953F071379A8F000478458 /* DURingChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DURingChartView.m; path = Views/DURingChartView.m; sourceTree = "<group>"; };
 		62953F091379A96800478458 /* DURingChartDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DURingChartDataSource.h; path = Views/DURingChartDataSource.h; sourceTree = "<group>"; };
-		62BAAE39137A59D40086BE25 /* DUFolderInfoTopEntries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DUFolderInfoTopEntries.h; path = Models/DUFolderInfoTopEntries.h; sourceTree = "<group>"; };
-		62BAAE3A137A59D40086BE25 /* DUFolderInfoTopEntries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DUFolderInfoTopEntries.m; path = Models/DUFolderInfoTopEntries.m; sourceTree = "<group>"; };
+		62B21EDB137E87B30004438C /* DUFolderTreeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DUFolderTreeItem.h; path = Controllers/DUFolderTreeItem.h; sourceTree = "<group>"; };
+		62B21EDC137E87B30004438C /* DUFolderTreeItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DUFolderTreeItem.m; path = Controllers/DUFolderTreeItem.m; sourceTree = "<group>"; };
+		62B21EE6137ED8580004438C /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		62BAAE3F137A67FE0086BE25 /* CorePlot.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CorePlot.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +115,7 @@
 		625604171374635C00C94C21 = {
 			isa = PBXGroup;
 			children = (
+				62B21EE6137ED8580004438C /* .gitignore */,
 				6256042C1374635C00C94C21 /* DiskUsagePg */,
 				6256044A1374635D00C94C21 /* DiskUsagePgTests */,
 				625604251374635C00C94C21 /* Frameworks */,
@@ -200,8 +206,6 @@
 				625605F11375A94200C94C21 /* DUFolderInfo.m */,
 				625605F31375A94200C94C21 /* DUScanFolderOperation.h */,
 				625605F01375A94200C94C21 /* DUScanFolderOperation.m */,
-				62BAAE39137A59D40086BE25 /* DUFolderInfoTopEntries.h */,
-				62BAAE3A137A59D40086BE25 /* DUFolderInfoTopEntries.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -209,9 +213,13 @@
 		625605EF1375A8E100C94C21 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				628ACA31137D94B6006CE711 /* DUFolderChartData.m */,
+				628ACA32137D94B6006CE711 /* DUFolderChartData.h */,
 				625605F61375A97900C94C21 /* DiskUsageController.h */,
 				625605F71375A97900C94C21 /* DiskUsageController.m */,
 				62953F031379A61700478458 /* DataFormatingUtils.h */,
+				62B21EDB137E87B30004438C /* DUFolderTreeItem.h */,
+				62B21EDC137E87B30004438C /* DUFolderTreeItem.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -298,6 +306,7 @@
 				625604311374635C00C94C21 /* InfoPlist.strings in Resources */,
 				625604371374635C00C94C21 /* Credits.rtf in Resources */,
 				6256043D1374635D00C94C21 /* MainMenu.xib in Resources */,
+				62B21EE7137ED8580004438C /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,7 +349,8 @@
 				625605F51375A94200C94C21 /* DUFolderInfo.m in Sources */,
 				625605F81375A97900C94C21 /* DiskUsageController.m in Sources */,
 				62953F081379A8F000478458 /* DURingChartView.m in Sources */,
-				62BAAE3B137A59D40086BE25 /* DUFolderInfoTopEntries.m in Sources */,
+				628ACA33137D94B6006CE711 /* DUFolderChartData.m in Sources */,
+				62B21EDD137E87B30004438C /* DUFolderTreeItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
