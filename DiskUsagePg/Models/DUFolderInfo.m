@@ -59,7 +59,8 @@
 {
     @synchronized(_subfolders)
     {
-        return [_subfolders copy];
+        // TODO: vracim copy a nedavam autorelease, at se jmenuje synchronizedCopy
+        return [[_subfolders copy] autorelease];
     }
 }
 

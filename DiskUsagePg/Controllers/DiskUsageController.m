@@ -38,7 +38,7 @@
     NSAssert(_scanFolderOperation == nil, @"Existing scan operation in progress?");
     _scanFolderOperation = [[DUScanFolderOperation alloc]initWithFolder:[NSURL URLWithString:_pathTextField.title]];
     // TODO: prejmenovat _folder
-    _treeDataRoot = [[DUFolderTreeDataItem alloc] initWithFolder:_scanFolderOperation.folderInfo];
+    _treeDataRoot = [[DUFolderTreeItem alloc] initWithFolder:_scanFolderOperation.folderInfo];
     _chartData = [[DUFolderChartData alloc] initWithFolder: _scanFolderOperation.folderInfo shareThreshold:5.0];
     [_scanFolderOperation addObserver:self forKeyPath:@"isFinished" options:NSKeyValueObservingOptionNew context:nil];
     [_backgroundQueue addOperation:_scanFolderOperation];
@@ -88,7 +88,7 @@
     
     // TODO: fakt musim poustet reloadData na main threadu? outlineView fungoval i bez toho, chart ale
     // mela zpozdeni pri zobrazeni
-    [_treeDataRoot update];
+    [_treeDataRoot invalidate];
     [_chartData update];
     
     [_diskUsageTree reloadData];
@@ -112,27 +112,26 @@
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
 {
-    DUFolderTreeDataItem *folder = item == nil ? _treeDataRoot :(DUFolderTreeDataItem *)item;
-    // TODO: ach ten blbej mem management
-    return [[folder subfolderAtIndex:index] retain];
+    DUFolderTreeItem *folderItem = item == nil ? _treeDataRoot :(DUFolderTreeItem *)item;
+    return [[folderItem children] objectAtIndex:index];
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
 {
-    DUFolderTreeDataItem *folder = item == nil ? _treeDataRoot :(DUFolderTreeDataItem *)item;
-    return [folder subfolderCount] > 0;
+    DUFolderTreeItem *folderItem = item == nil ? _treeDataRoot :(DUFolderTreeItem *)item;
+    return [folderItem isExpandable];
 }
 
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item 
 {
-    DUFolderTreeDataItem *folder = item == nil ? _treeDataRoot :(DUFolderTreeDataItem *)item;
-    return [folder subfolderCount];
+    DUFolderTreeItem *folderItem = item == nil ? _treeDataRoot :(DUFolderTreeItem *)item;
+    return [[folderItem children] count];
 }
 
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
 {
-    DUFolderTreeDataItem *folderView = item == nil ? _treeDataRoot :(DUFolderTreeDataItem *)item;
-    DUFolderInfo *folder = [folderView folder];
+    DUFolderTreeItem *folderItem = item == nil ? _treeDataRoot :(DUFolderTreeItem *)item;
+    DUFolderInfo *folder = folderItem.folder;
     
     if ([tableColumn.identifier isEqualTo:@"folderName"])
     {
@@ -151,9 +150,9 @@
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item
 {
     [_chartData release];
-    DUFolderTreeDataItem *selectedFolder = (DUFolderTreeDataItem *)item;
+    DUFolderTreeItem *selectedTreeItem = (DUFolderTreeItem *)item;
     // TODO: threshold na 2 mistech
-    _chartData = [[DUFolderChartData alloc] initWithFolder:selectedFolder.folder shareThreshold:5.0];
+    _chartData = [[DUFolderChartData alloc] initWithFolder:selectedTreeItem.folder shareThreshold:5.0];
     [_chartData update]; // TODO: tenhle update krok bych mohl odstranit
     
     [_diskUsageChart reloadData];

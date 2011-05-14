@@ -12,11 +12,11 @@
 #import "DURingChartView.h"
 #import "DURingChartDataSource.h"
 #import "DUFolderChartData.h"
-#import "DUFolderTreeDataItem.h"
+#import "DUFolderTreeItem.h"
 
 @interface DiskUsageController : NSViewController <NSOutlineViewDataSource, NSOutlineViewDelegate,  DURingChartDataSource> {
 @private
-    DUFolderTreeDataItem *_treeDataRoot;
+    DUFolderTreeItem *_treeDataRoot;
     DUFolderChartData *_chartData;
     
     IBOutlet NSButton *_scanOrCancelButton;
