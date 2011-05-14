@@ -17,6 +17,7 @@
     NSMutableArray *_currentSectors;
     NSMapTable *_sectorsCache;
     NSMutableArray *_colors;
+    NSColor *_othersColor;
     NSUInteger _nextColor;
 }
 

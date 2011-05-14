@@ -15,9 +15,7 @@
 - (void)awakeFromNib
 {
     _backgroundQueue = [[NSOperationQueue alloc] init];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(outlineViewSelectionDidChange:) name:NSOutlineViewSelectionDidChangeNotification object:_diskUsageTree];
-    
+
     _pathTextField.title = NSHomeDirectory();
 }
 
@@ -32,25 +30,42 @@
     [super dealloc];
 }
 
-- (IBAction)scanFolder:(id)sender {
+- (IBAction)startOrStopScan:(id)sender {
     // TODO: samozrejme kontrolovat, ze je zadana validni hodnota
     
-    NSAssert(_scanFolderOperation == nil, @"Existing scan operation in progress?");
-    _scanFolderOperation = [[DUScanFolderOperation alloc]initWithFolder:[NSURL URLWithString:_pathTextField.title]];
-    // TODO: prejmenovat _folder
-    _treeDataRoot = [[DUFolderTreeItem alloc] initWithFolder:_scanFolderOperation.folderInfo];
-    _chartData = [[DUFolderChartData alloc] initWithFolder: _scanFolderOperation.folderInfo shareThreshold:5.0];
-    [_scanFolderOperation addObserver:self forKeyPath:@"isFinished" options:NSKeyValueObservingOptionNew context:nil];
-    [_backgroundQueue addOperation:_scanFolderOperation];
+    if (!isScanRunning)
+    {
+        [_scanOrCancelButton setEnabled:NO];
+        isScanRunning = YES;
+        
+        NSAssert(_scanFolderOperation == nil, @"Existing scan operation in progress?");
+        _scanFolderOperation = [[DUScanFolderOperation alloc]initWithFolderURL:[NSURL URLWithString:_pathTextField.title]];
+        // TODO: prejmenovat _folder
+        _treeDataRoot = [[DUFolderTreeItem alloc] initWithFolder: _scanFolderOperation.folderInfo];
+        _chartData = [[DUFolderChartData alloc] initWithFolder: _scanFolderOperation.folderInfo shareThreshold:5.0];
+        [_scanFolderOperation addObserver:self forKeyPath:@"isFinished" options:NSKeyValueObservingOptionNew context:nil];
+        [_backgroundQueue addOperation:_scanFolderOperation];
+        
+        [_pathTextField setEnabled:NO];
+        [_progress startAnimation:self];
+        [_progress setHidden:NO];
+        
+        // TODO:
+        NSAssert(_updateGUITimer == nil, @"Timer already exists");
+        _updateGUITimer = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:2.0] interval:0.5 target:self selector:@selector(updateGUI:) userInfo:nil repeats:YES];
+        [[NSRunLoop mainRunLoop] addTimer:_updateGUITimer forMode:NSDefaultRunLoopMode];
+        
+        [_scanOrCancelButton setTitle:@"Cancel"];
+        [_scanOrCancelButton setEnabled:YES];
 
-    [_scanOrCancelButton setTitle:@"Cancel"];
-    [_pathTextField setEnabled:NO];
-    [_progress startAnimation:self];
-    [_progress setHidden:NO];
-
-    // TODO:
-    NSAssert(_updateGUITimer == nil, @"Timer already exists");
-    _updateGUITimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(updateGUI:) userInfo:nil repeats:YES];
+    }
+    else
+    {
+        [_scanFolderOperation cancel];
+        [self scanFolderCompleted];
+        isScanRunning = NO;
+    }
+    
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -96,17 +111,6 @@
 }
 
 
-
-#pragma mark - NSOutlineView Notifications
-- (void)outlineViewSelectionDidChange:(NSNotification *)notification
-{
-//    [_chartData release];
-//    DUFolderInfo *selectedFolder = [[_diskUsageTree itemAtRow:[_diskUsageTree selectedRow]] folder];
-//    // TODO: threshold na 2 mistech
-//    _chartData = [[DUFolderChartData alloc] initWithFolder:selectedFolder shareThreshold:5.0];
-//    
-//    [self updateGUI:nil];
-}
 
 #pragma mark - NSOutlineViewDataSource Members
 
@@ -192,7 +196,15 @@
     DUFolderChartSector *sector = (DUFolderChartSector *)item;
     
     NSString *folderName;
-    folderName = [sector.folder.url lastPathComponent];
+    if (sector.folder != nil)
+    {
+        folderName = [sector.folder.url lastPathComponent];
+    }
+    else
+    {
+        // TODO:
+        folderName = @"Others";
+    }
     
     NSString *folderSize = unitStringFromBytes(sector.size, kUnitStringOSNativeUnits | kUnitStringLocalizedFormat);
     

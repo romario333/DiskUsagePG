@@ -57,7 +57,7 @@ void DULogFolderInfo(DUFolderInfo *folder);
     // Apple
     // System
     // Crayons
-    NSLog(@"And they are: %@", [[NSColorList colorListNamed:@"Web Safe Colors"] allKeys]);
+    NSLog(@"And they are: %@", [[NSColorList colorListNamed:@"Crayons"] allKeys]);
 }
 
 //- (void)testTestHome

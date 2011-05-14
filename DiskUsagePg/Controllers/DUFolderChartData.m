@@ -22,13 +22,37 @@
         _sectorsCache = [[NSMapTable alloc] initWithKeyOptions:NSMapTableStrongMemory valueOptions:NSMapTableStrongMemory capacity:50];
         
         _colors = [[NSMutableArray alloc] init];
-        // TODO: kde beru jistotu, ze tam neco takovyho bude?
-        NSColorList *colorList = [NSColorList colorListNamed:@"Web Safe Colors"];
-        for (NSString *colorKey in [colorList allKeys])
+        
+        for (int i = 80; i >= 20; i -= 20)
         {
-            [_colors addObject:[colorList colorWithKey:colorKey]];
+            CGFloat component = i / 100.0;
+            [_colors addObject:[NSColor colorWithDeviceRed:0.0 green:component blue:0.0 alpha:1.0]];
+            [_colors addObject:[NSColor colorWithDeviceRed:component green:0.0 blue:0.0 alpha:1.0]];
+            [_colors addObject:[NSColor colorWithDeviceRed:0.0 green:0.0 blue:component alpha:1.0]];
         }
-        _nextColor = 16;
+        
+//        NSUInteger baseColorsCount = [_colors count];
+//        for (NSUInteger offset = 10; offset < 100; offset += 10)
+//        {
+//            for (NSUInteger i = 0; i < baseColorsCount; i++)
+//            {
+//                CGFloat hue, saturation, brightness, alpha;
+//                [[_colors objectAtIndex:i] getHue:&hue saturation:&saturation brightness:&brightness alpha:&alpha];
+//                brightness += offset;
+//                [_colors addObject:[NSColor colorWithCalibratedHue:hue saturation:saturation brightness:brightness alpha:alpha]];
+//            }
+//        }
+        
+        // TODO: kde beru jistotu, ze tam neco takovyho bude?
+        
+//        NSColorList *colorList = [NSColorList colorListNamed:@"Web Safe Colors"];
+//        for (NSString *colorKey in [colorList allKeys])
+//        {
+//            [_colors addObject:[colorList colorWithKey:colorKey]];
+//        }
+//        _nextColor = 70;
+        _othersColor = [[NSColor colorWithDeviceRed:0.4 green:0.4 blue:0.4 alpha:1.0] retain];
+        
         
     }
     
@@ -41,6 +65,7 @@
     [_currentSectors release];
     [_sectorsCache release];
     [_colors release];
+    [_othersColor release];
     [super dealloc];
 }
 
@@ -82,7 +107,8 @@
     
     
     [_currentSectors removeAllObjects];
-    NSUInteger othersShare = 0;
+    NSUInteger othersSize
+    = 0;
     for (DUFolderChartSector *sectorCandidate in sectorCandidates)
     {
         NSUInteger sectorShare = (NSUInteger)(([sectorCandidate.folder size] / (double)totalSize) * 100);
@@ -100,9 +126,14 @@
         }
         else
         {
-            othersShare += sectorCandidate.size;
+            othersSize += sectorCandidate.size;
         }
     }
+    
+    DUFolderChartSector *othersSector = [[DUFolderChartSector alloc] initWithFolder:nil size:othersSize];
+    othersSector.color = _othersColor;
+    [_currentSectors addObject:othersSector];
+    [othersSector release];
     
     [sectorCandidates release];
 }

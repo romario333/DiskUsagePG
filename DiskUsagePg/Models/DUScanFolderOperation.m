@@ -13,7 +13,7 @@
 
 @synthesize folderInfo = _folderInfo;
 
-- (id)initWithFolder:(NSURL *)folderURL
+- (id)initWithFolderURL:(NSURL *)folderURL
 {
     self = [super init];
     if (self) {

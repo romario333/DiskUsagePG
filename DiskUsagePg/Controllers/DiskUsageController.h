@@ -28,9 +28,11 @@
     NSOperationQueue *_backgroundQueue;
     DUScanFolderOperation *_scanFolderOperation;
     NSTimer *_updateGUITimer;
+    
+    BOOL isScanRunning;
 }
 
-- (IBAction)scanFolder:(id)sender;
+- (IBAction)startOrStopScan:(id)sender;
 - (void)scanFolderCompleted;
 - (void)updateGUI:(NSTimer*)theTimer;
 

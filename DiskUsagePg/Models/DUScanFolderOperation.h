@@ -14,7 +14,7 @@
     DUFolderInfo *_folderInfo;
 }
 
-- (id)initWithFolder:(NSURL *)folderURL;
+- (id)initWithFolderURL:(NSURL *)folderURL;
 
 - (void)_scanFolder;
 

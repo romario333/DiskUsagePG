@@ -15,6 +15,8 @@
     NSMutableArray *_childrenCache;
 }
 
+- (id)initWithFolder:(DUFolderInfo *)folder;
+
 // TODO: natvrdo sorteni podle size desc, fuj
 /** @brief Returns children of this tree item. 
  *  @return Array of <code>DUFolderTreeItem</code> objects representing children of this item.
