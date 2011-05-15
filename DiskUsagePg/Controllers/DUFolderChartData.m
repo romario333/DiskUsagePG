@@ -11,6 +11,8 @@
 
 @implementation DUFolderChartData
 
+@synthesize folder = _folder;
+
 - (id)initWithFolder:(DUFolderInfo *)folder shareThreshold:(NSUInteger)shareThreshold
 {
     
@@ -118,7 +120,7 @@
             if ([_sectorsCache objectForKey:sectorCandidate.folder] == nil)
             {
                 // new sector, assign it next color and put it to cache
-                NSLog(@"New color for %@", sectorCandidate.folder);
+//                NSLog(@"New color for %@", sectorCandidate.folder);
                 sectorCandidate.color = [_colors objectAtIndex:_nextColor];
                 _nextColor++;
                 [_sectorsCache setObject:sectorCandidate forKey:sectorCandidate.folder];

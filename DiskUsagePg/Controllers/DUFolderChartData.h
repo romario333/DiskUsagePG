@@ -26,6 +26,8 @@
 
 - (void)update;
 
+@property (readonly, retain) DUFolderInfo *folder;
+
 @end
 
 @interface DUFolderChartSector : NSObject {

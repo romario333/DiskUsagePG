@@ -44,6 +44,7 @@
         
         
         [_treeController addObject:_treeDataRoot];
+//        [_treeController setContent:_treeDataRoot];
         
         _chartData = [[DUFolderChartData alloc] initWithFolder: _scanFolderOperation.folderInfo shareThreshold:5.0];
         [_scanFolderOperation addObserver:self forKeyPath:@"isFinished" options:NSKeyValueObservingOptionNew context:nil];
@@ -55,7 +56,7 @@
         
         // TODO:
         NSAssert(_updateGUITimer == nil, @"Timer already exists");
-        _updateGUITimer = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:2.0] interval:0.5 target:self selector:@selector(updateGUI:) userInfo:nil repeats:YES];
+        _updateGUITimer = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSinceNow:2.0] interval:0.5 target:self selector:@selector(updateOnTimer:) userInfo:nil repeats:YES];
         [[NSRunLoop mainRunLoop] addTimer:_updateGUITimer forMode:NSDefaultRunLoopMode];
         
         [_scanOrCancelButton setTitle:@"Cancel"];
@@ -84,21 +85,27 @@
     [_updateGUITimer invalidate];
     _updateGUITimer = nil;
     
-    [self updateGUI:nil];
+    [self updateOnTimer:nil];
     
     [_pathTextField setEnabled:YES];
     // TODO:
     [_scanOrCancelButton setTitle:@"Scan Folder"];
     [_progress setHidden:YES];
     [_progress stopAnimation:self];
+    
+
 
     
 }
 
 // TODO: volat z timeru pres notfication, abych tu nemusel mit ten parametr
 
-- (void)updateGUI:(NSTimer*)theTimer
+- (void)updateOnTimer:(NSTimer*)theTimer
 {
+    [_diskUsageTree expandItem:[_diskUsageTree itemAtRow:0]]; // TODO: fuj
+    
+    [self updateOutline];
+    [self updateChart];
     // TODO: razeni
 //    [_scannedFolderInfo sort];
 //    _topFolders = [[DUFolderInfoTopEntries alloc]initWithArray:_scannedFolderInfo.subfolders shareThreshold:10];
@@ -106,12 +113,31 @@
     
     // TODO: fakt musim poustet reloadData na main threadu? outlineView fungoval i bez toho, chart ale
     // mela zpozdeni pri zobrazeni
-    [_treeDataRoot invalidate];
-    [_chartData update];
     
-    [_diskUsageTree reloadData];
-    [_diskUsageChart reloadData];
+    
 }
+
+- (void)updateOutline
+{
+    [_treeDataRoot updateChildrenCache];
+    // TODO: reloaduju rucne misto KVO na size, zkusit zmerit, co by bylo efektivnejsi
+    [_diskUsageTree reloadData];
+
+}
+
+- (void)updateChart
+{
+    // TODO: fuj
+    [_chartData update];
+    NSString *folderName = [_chartData.folder.url path];
+    NSString *folderSize = [_fileSizeFormatter stringFromFileSize:_chartData.folder.size];
+
+    _diskUsageChart.title = [NSString stringWithFormat:@"%@ (%@)", folderName, folderSize];
+    [_diskUsageChart reloadData];
+    
+}
+
+
 
 
 
@@ -161,9 +187,8 @@
     DUFolderTreeItem *selectedTreeItem = (DUFolderTreeItem *)[item representedObject];
     // TODO: threshold na 2 mistech
     _chartData = [[DUFolderChartData alloc] initWithFolder:selectedTreeItem.folder shareThreshold:5.0];
-    [_chartData update]; // TODO: tenhle update krok bych mohl odstranit
     
-    [_diskUsageChart reloadData];
+    [self updateChart];
     
     return YES;
 }
@@ -171,7 +196,7 @@
 - (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item
 {
     NSTreeNode *treeNode = (NSTreeNode *)item;
-    return treeNode.indexPath.length == 2;
+    return treeNode.indexPath.length == 1;
 }
 
 #pragma mark - DURingChartDataSource Members

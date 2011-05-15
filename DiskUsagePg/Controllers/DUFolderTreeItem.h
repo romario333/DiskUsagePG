@@ -10,20 +10,22 @@
 #import "DUFolderInfo.h"
 #import "DUFileSizeFormatter.h"
 
-// TODO: nemohl by tohle nahradit NSArrayController ?
+// TODO: jedina funkce tohoto objektu je serazovat foldery podle velikosti. Nemohl
+// by to delat primo NSTreeController?
 @interface DUFolderTreeItem : NSObject {
 @private
     BOOL _isExpanded;
     BOOL _isSelected;
     DUFolderInfo *_folder;
     
-    NSMutableArray *_childrenCache;
+    NSMapTable *_childrenCache;
+    NSMutableArray *_sortedChildrenCache;
+    BOOL _childrenCacheShouldBeUpdated;
     DUFileSizeFormatter *_fileSizeFormatter;
 }
 
 - (id)initWithFolder:(DUFolderInfo *)folder;
 
-// TODO: natvrdo sorteni podle size desc, fuj
 /** @brief Returns children of this tree item. 
  *  @return Array of <code>DUFolderTreeItem</code> objects representing children of this item.
  *
@@ -34,10 +36,7 @@
 
 - (BOOL)isLeaf;
 
-/** @brief Invalidates children cached on the first call of <code>children</code>.
- *
- **/
-- (void)invalidate;
+- (void)updateChildrenCache;
 
 
 @property (nonatomic, retain) DUFolderInfo *folder;

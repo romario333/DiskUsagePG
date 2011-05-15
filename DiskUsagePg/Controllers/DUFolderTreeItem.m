@@ -25,6 +25,15 @@
 
 - (void)dealloc
 {
+    if (_childrenCache != nil)
+    {
+        [_childrenCache release];
+    }
+    if (_sortedChildrenCache != nil)
+    {
+        [_sortedChildrenCache release];
+    }
+    
     [_folder release];
     [_fileSizeFormatter release];
     [super dealloc];
@@ -32,27 +41,46 @@
 
 - (NSArray *)children
 {
-    
+    static NSUInteger cacheInitialCapacity = 10;
     
     if (_childrenCache == nil)
     {
-        NSMutableArray *subfolders = [_folder.subfolders mutableCopy];
+        _childrenCache = [[NSMapTable alloc] initWithKeyOptions:NSMapTableStrongMemory valueOptions:NSMapTableStrongMemory capacity:cacheInitialCapacity];
+        _childrenCacheShouldBeUpdated = YES;
+    }
+    
+    if (_childrenCacheShouldBeUpdated)
+    {
+        if (_sortedChildrenCache == nil)
+        {
+            _sortedChildrenCache = [[NSMutableArray alloc] initWithCapacity:cacheInitialCapacity];
+        }
+        [_sortedChildrenCache removeAllObjects];
         
-        NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"size" ascending:NO];
-        [subfolders sortUsingDescriptors:[NSArray arrayWithObject:sortDesc]];
-        
-        _childrenCache = [[NSMutableArray alloc] init];
+        NSArray *subfolders = [_folder.subfolders copy];
         for (DUFolderInfo *folder in subfolders)
         {
-            DUFolderTreeItem *child = [[DUFolderTreeItem alloc] initWithFolder:folder];
-            [_childrenCache addObject:child];
-            // TODO: nesmi je zahazovat, jinak je nenajde a nemuze je sledovat
-            //[child release];
+            DUFolderTreeItem *folderItem = [[_childrenCache objectForKey:folder] retain];
+            // TODO: neresim tu pripad, kdy foldery zacnou mizet?
+            if (folderItem == nil)
+            {
+//                NSLog(@"New folder detected");
+                folderItem = [[DUFolderTreeItem alloc] initWithFolder:folder];
+                [_childrenCache setObject:folderItem forKey:folder];
+            }
+            [_sortedChildrenCache addObject:folderItem];
+            [folderItem release];
         }
         [subfolders release];
+        
+        NSSortDescriptor *sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"folder.size" ascending:NO];
+        [_sortedChildrenCache sortUsingDescriptors:[NSArray arrayWithObject:sortDesc]];
+        
+        _childrenCacheShouldBeUpdated = NO;
 
     }
-    return _childrenCache;
+    
+    return _sortedChildrenCache;
 }
 
 - (BOOL)isLeaf
@@ -61,20 +89,20 @@
     return [[self children] count] == 0;
 }
 
-- (void)invalidate
+- (void)updateChildrenCache
 {
+    [super willChangeValueForKey:@"children"]; // TODO: neslo by pres selector?
+    
     if (_childrenCache != nil)
     {
-        for (DUFolderTreeItem *child in _childrenCache)
+        for (DUFolderTreeItem *child in [_childrenCache objectEnumerator])
         {
-            [child invalidate];
+            [child updateChildrenCache];
         }
-        
-        // TODO: zkusit, jestli by se zrychlilo, kdybych volal removeAllObjects
-        // a cache nevytvarel znovu
-        [_childrenCache release];
-        _childrenCache = nil;
     }
+    _childrenCacheShouldBeUpdated = YES;
+    
+    [super didChangeValueForKey:@"children"];
 }
 
 - (NSString *)folderName
@@ -84,7 +112,6 @@
 
 - (NSString *)folderSize
 {
-    // TODO:
     return [_fileSizeFormatter stringFromFileSize:_folder.size];
 }
 

@@ -28,4 +28,6 @@
 - (void)_setupGraph;
 - (void)_setupPieChart;
 
+@property (nonatomic, retain) NSString *title;
+
 @end

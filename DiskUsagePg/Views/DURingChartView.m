@@ -74,6 +74,16 @@ static NSString *kSectorColor = @"sectorColor";
     
     [_graph reloadData];
 }
+
+- (NSString *)title
+{
+    return [_graph title];
+}
+
+- (void)setTitle:(NSString *)title
+{
+    [_graph setTitle:title];
+}
                    
 
 - (void)_setupGraph
@@ -106,8 +116,10 @@ static NSString *kSectorColor = @"sectorColor";
     _piePlot = [[CPPieChart alloc] init];
     _piePlot.pieRadius = MIN(0.7 * (self.frame.size.height - 2 * _graph.paddingLeft) / 2.0,
                              0.7 * (self.frame.size.width - 2 * _graph.paddingTop) / 2.0);
-	CGFloat innerRadius = _piePlot.pieRadius / 2.0;
-	_piePlot.pieInnerRadius = innerRadius + 5.0;
+
+	// TODO: az pro multigraf
+//    CGFloat innerRadius = _piePlot.pieRadius / 2.0;
+//	_piePlot.pieInnerRadius = innerRadius + 5.0;
     _piePlot.identifier = @"TODOkcemu";
 	//_piePlot.borderLineStyle = whiteLineStyle;
     _piePlot.startAngle = M_PI_4;
@@ -172,5 +184,7 @@ static NSString *kSectorColor = @"sectorColor";
 //    return [[CPTextLayer alloc] initWithText:@"chudaci"];
 //    
 //}
+
+
 
 @end

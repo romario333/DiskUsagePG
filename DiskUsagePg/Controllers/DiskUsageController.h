@@ -38,7 +38,9 @@
 
 - (IBAction)startOrStopScan:(id)sender;
 - (void)scanFolderCompleted;
-- (void)updateGUI:(NSTimer*)theTimer;
+- (void)updateOnTimer:(NSTimer*)theTimer;
+- (void)updateOutline;
+- (void)updateChart;
 
 
 @end
