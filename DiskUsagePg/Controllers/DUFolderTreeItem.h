@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DUFolderInfo.h"
+#import "DUFileSizeFormatter.h"
 
 // TODO: nemohl by tohle nahradit NSArrayController ?
 @interface DUFolderTreeItem : NSObject {
@@ -17,6 +18,7 @@
     DUFolderInfo *_folder;
     
     NSMutableArray *_childrenCache;
+    DUFileSizeFormatter *_fileSizeFormatter;
 }
 
 - (id)initWithFolder:(DUFolderInfo *)folder;
@@ -30,18 +32,17 @@
  **/
 - (NSArray *)children;
 
+- (BOOL)isLeaf;
+
 /** @brief Invalidates children cached on the first call of <code>children</code>.
  *
  **/
 - (void)invalidate;
 
-/** @brief Returns <code>YES</code> if this tree item can be expanded.
- **/
-- (BOOL)isExpandable;
 
 @property (nonatomic, retain) DUFolderInfo *folder;
-// TODO: doimplementovat
-@property BOOL isExpanded;
-@property BOOL isSelected;
+
+- (NSString *)folderName;
+- (NSString *)folderSize;
 
 @end

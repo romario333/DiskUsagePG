@@ -13,8 +13,9 @@
 #import "DURingChartDataSource.h"
 #import "DUFolderChartData.h"
 #import "DUFolderTreeItem.h"
+#import "DUFileSizeFormatter.h"
 
-@interface DiskUsageController : NSViewController <NSOutlineViewDataSource, NSOutlineViewDelegate,  DURingChartDataSource> {
+@interface DiskUsageController : NSViewController <NSOutlineViewDelegate,  DURingChartDataSource> {
 @private
     DUFolderTreeItem *_treeDataRoot;
     DUFolderChartData *_chartData;
@@ -30,6 +31,9 @@
     NSTimer *_updateGUITimer;
     
     BOOL isScanRunning;
+    IBOutlet NSTreeController *_treeController;
+    
+    DUFileSizeFormatter *_fileSizeFormatter;
 }
 
 - (IBAction)startOrStopScan:(id)sender;

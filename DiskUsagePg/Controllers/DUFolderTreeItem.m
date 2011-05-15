@@ -8,16 +8,16 @@
 
 #import "DUFolderTreeItem.h"
 
-
 @implementation DUFolderTreeItem
 
-@synthesize isExpanded = _isExpanded, isSelected = _isSelected, folder = _folder;
+@synthesize folder = _folder;
 
 - (id)initWithFolder:(DUFolderInfo *)folder
 {
     self = [super init];
     if (self) {
         self.folder = folder;
+        _fileSizeFormatter = [[DUFileSizeFormatter alloc] initWithStyle:DUFileSizeFormatterOSNativeUnits | DUFileSizeFormatterLocalizedFormat];
     }
     
     return self;
@@ -26,11 +26,14 @@
 - (void)dealloc
 {
     [_folder release];
+    [_fileSizeFormatter release];
     [super dealloc];
 }
 
 - (NSArray *)children
 {
+    
+    
     if (_childrenCache == nil)
     {
         NSMutableArray *subfolders = [_folder.subfolders mutableCopy];
@@ -43,12 +46,19 @@
         {
             DUFolderTreeItem *child = [[DUFolderTreeItem alloc] initWithFolder:folder];
             [_childrenCache addObject:child];
-            [child release];
+            // TODO: nesmi je zahazovat, jinak je nenajde a nemuze je sledovat
+            //[child release];
         }
         [subfolders release];
 
     }
     return _childrenCache;
+}
+
+- (BOOL)isLeaf
+{
+    // TODO: kdybych chtel jo optimalizovat, tak zaridim, aby se tady deti nesortili 
+    return [[self children] count] == 0;
 }
 
 - (void)invalidate
@@ -67,11 +77,15 @@
     }
 }
 
-- (BOOL)isExpandable
+- (NSString *)folderName
 {
-    // TODO: kdybych chtel jo optimalizovat, tak zaridim, aby se tady deti nesortili 
-    return [[self children] count] > 0;
+    return [_folder.url lastPathComponent];
 }
 
+- (NSString *)folderSize
+{
+    // TODO:
+    return [_fileSizeFormatter stringFromFileSize:_folder.size];
+}
 
 @end

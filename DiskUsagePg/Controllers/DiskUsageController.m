@@ -7,7 +7,6 @@
 //
 
 #import "DiskUsageController.h"
-#import "DataFormatingUtils.h"
 
 
 @implementation DiskUsageController
@@ -15,6 +14,7 @@
 - (void)awakeFromNib
 {
     _backgroundQueue = [[NSOperationQueue alloc] init];
+    _fileSizeFormatter = [[DUFileSizeFormatter alloc] initWithStyle:DUFileSizeFormatterOSNativeUnits | DUFileSizeFormatterLocalizedFormat];
 
     _pathTextField.title = NSHomeDirectory();
 }
@@ -40,8 +40,11 @@
         
         NSAssert(_scanFolderOperation == nil, @"Existing scan operation in progress?");
         _scanFolderOperation = [[DUScanFolderOperation alloc]initWithFolderURL:[NSURL URLWithString:_pathTextField.title]];
-        // TODO: prejmenovat _folder
         _treeDataRoot = [[DUFolderTreeItem alloc] initWithFolder: _scanFolderOperation.folderInfo];
+        
+        
+        [_treeController addObject:_treeDataRoot];
+        
         _chartData = [[DUFolderChartData alloc] initWithFolder: _scanFolderOperation.folderInfo shareThreshold:5.0];
         [_scanFolderOperation addObserver:self forKeyPath:@"isFinished" options:NSKeyValueObservingOptionNew context:nil];
         [_backgroundQueue addOperation:_scanFolderOperation];
@@ -112,49 +115,50 @@
 
 
 
-#pragma mark - NSOutlineViewDataSource Members
-
-- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
-{
-    DUFolderTreeItem *folderItem = item == nil ? _treeDataRoot :(DUFolderTreeItem *)item;
-    return [[folderItem children] objectAtIndex:index];
-}
-
-- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
-{
-    DUFolderTreeItem *folderItem = item == nil ? _treeDataRoot :(DUFolderTreeItem *)item;
-    return [folderItem isExpandable];
-}
-
-- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item 
-{
-    DUFolderTreeItem *folderItem = item == nil ? _treeDataRoot :(DUFolderTreeItem *)item;
-    return [[folderItem children] count];
-}
-
-- (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
-{
-    DUFolderTreeItem *folderItem = item == nil ? _treeDataRoot :(DUFolderTreeItem *)item;
-    DUFolderInfo *folder = folderItem.folder;
-    
-    if ([tableColumn.identifier isEqualTo:@"folderName"])
-    {
-        return [folder.url lastPathComponent];
-    }
-    else if ([tableColumn.identifier isEqualTo:@"folderSize"])
-    {
-        return unitStringFromBytes([folder size], kUnitStringOSNativeUnits | kUnitStringLocalizedFormat);
-    }
-    
-    return nil;
-}
+//#pragma mark - NSOutlineViewDataSource Members
+//
+//- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
+//{
+//    DUFolderTreeItem *folderItem = item == nil ? _treeDataRoot :(DUFolderTreeItem *)item;
+//    return [[folderItem children] objectAtIndex:index];
+//}
+//
+//- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
+//{
+//    DUFolderTreeItem *folderItem = item == nil ? _treeDataRoot :(DUFolderTreeItem *)item;
+//    return [folderItem isExpandable];
+//}
+//
+//- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item 
+//{
+//    DUFolderTreeItem *folderItem = item == nil ? _treeDataRoot :(DUFolderTreeItem *)item;
+//    return [[folderItem children] count];
+//}
+//
+//- (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
+//{
+//    DUFolderTreeItem *folderItem = item == nil ? _treeDataRoot :(DUFolderTreeItem *)item;
+//    DUFolderInfo *folder = folderItem.folder;
+//    
+//    if ([tableColumn.identifier isEqualTo:@"folderName"])
+//    {
+//        return [folder.url lastPathComponent];
+//    }
+//    else if ([tableColumn.identifier isEqualTo:@"folderSize"])
+//    {
+//        return unitStringFromBytes([folder size], kUnitStringOSNativeUnits | kUnitStringLocalizedFormat);
+//    }
+//    
+//    return nil;
+//}
 
 #pragma mark - NSOutlineViewDelegate Members
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item
 {
     [_chartData release];
-    DUFolderTreeItem *selectedTreeItem = (DUFolderTreeItem *)item;
+    
+    DUFolderTreeItem *selectedTreeItem = (DUFolderTreeItem *)[item representedObject];
     // TODO: threshold na 2 mistech
     _chartData = [[DUFolderChartData alloc] initWithFolder:selectedTreeItem.folder shareThreshold:5.0];
     [_chartData update]; // TODO: tenhle update krok bych mohl odstranit
@@ -162,6 +166,12 @@
     [_diskUsageChart reloadData];
     
     return YES;
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item
+{
+    NSTreeNode *treeNode = (NSTreeNode *)item;
+    return treeNode.indexPath.length == 2;
 }
 
 #pragma mark - DURingChartDataSource Members
@@ -206,7 +216,7 @@
         folderName = @"Others";
     }
     
-    NSString *folderSize = unitStringFromBytes(sector.size, kUnitStringOSNativeUnits | kUnitStringLocalizedFormat);
+    NSString *folderSize = [_fileSizeFormatter stringFromFileSize:sector.size];
     
     return [NSString stringWithFormat:@"%@ (%@)", folderName, folderSize];
 }
