@@ -130,6 +130,8 @@ static NSString *kSectorColor = @"sectorColor";
     //    _piePlot.delegate = self;
     
     
+    
+    
     [_graph addPlot:_piePlot];
     
     //[piePlot release];

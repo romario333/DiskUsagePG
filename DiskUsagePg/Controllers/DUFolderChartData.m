@@ -110,8 +110,7 @@
     
     
     [_currentSectors removeAllObjects];
-    NSUInteger othersSize
-    = 0;
+    NSUInteger othersSize = 0;
     for (DUFolderChartSector *sectorCandidate in sectorCandidates)
     {
         NSUInteger sectorShare = (NSUInteger)(([sectorCandidate.folder size] / (double)totalSize) * 100);
@@ -120,7 +119,9 @@
             if ([_sectorsCache objectForKey:sectorCandidate.folder] == nil)
             {
                 // new sector, assign it next color and put it to cache
-//                NSLog(@"New color for %@", sectorCandidate.folder);
+                if (_nextColor >= [_colors count]) {
+                    _nextColor = 0;
+                }
                 sectorCandidate.color = [_colors objectAtIndex:_nextColor];
                 _nextColor++;
                 [_sectorsCache setObject:sectorCandidate forKey:sectorCandidate.folder];
